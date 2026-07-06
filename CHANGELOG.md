@@ -17,6 +17,10 @@ The format is based on Keep a Changelog, and this project follows Semantic Versi
 - Expanded catalog search to match cabinet version text and release notes.
 - Improved external cabinet play pages with live status notes and always-available open-tab recovery.
 
+### Fixed
+
+- Updated the GitHub Pages workflow to include the standard Pages configuration step and documented the required repository Pages setting for successful deployments.
+
 ## [0.2.0] - 2026-07-06
 
 ### Added

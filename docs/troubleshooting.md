@@ -19,3 +19,13 @@ Ensure the manifest thumbnail path is relative, such as `images/example.svg`, so
 ## Runtime feed does not refresh
 
 Confirm both `public/data/games.json` and `public/data/updates.json` are valid JSON and that any new fields still satisfy the `GameEntry` and update feed contracts.
+
+## GitHub Pages deploy fails with 404
+
+If the workflow fails during `actions/deploy-pages` with `Failed to create deployment (status: 404)`, enable GitHub Pages in the repository first:
+
+- Open repository settings
+- Open Pages
+- Set the build source to `GitHub Actions`
+
+The workflow also expects the standard Pages setup step `actions/configure-pages`, which is included in the repository workflow.
