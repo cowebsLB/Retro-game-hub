@@ -2,43 +2,61 @@
 
 ## Hosting Target
 
-GitHub Pages is the v1 hosting target.
+Retro Game Hub ships as a static GitHub Pages site.
 
-## Build Assumptions
+## Production Assumptions
 
-- The Vite production base path is `/Retro-game-hub/`
-- The application uses hash routing to avoid static-host rewrite issues
-- Runtime-fed catalog data is served from `public/data/*`
+- Vite base path: `/Retro-game-hub/`
+- route model: hash routing
+- deploy workflow: `.github/workflows/deploy.yml`
+- artifact source: `dist/`
 
-## Workflow
+## GitHub Pages Repository Setting
 
-The deployment workflow lives in [`.github/workflows/deploy.yml`](../.github/workflows/deploy.yml).
+The repository must have GitHub Pages enabled before deployment can succeed.
 
-It performs these steps:
-
-1. Checkout the repository
-2. Configure GitHub Pages metadata through `actions/configure-pages`
-3. Setup Node.js
-4. Install dependencies with `npm ci`
-5. Run the Vitest suite with `npm run test:run`
-6. Build the site with `npm run build`
-7. Upload the `dist/` artifact
-8. Deploy to GitHub Pages
-
-## Required Repository Setting
-
-GitHub Pages must already be enabled in the repository settings before the deployment step can succeed.
-
-Expected setting:
+Required setting:
 
 - Repository Settings
 - Pages
-- Build and deployment source: GitHub Actions
+- Build and deployment source: `GitHub Actions`
 
-If that setting has never been enabled, `actions/deploy-pages` can fail with a `404 Not Found` while trying to create the deployment even if the build and artifact upload succeed.
+Without that setting, `actions/deploy-pages` can fail with a `404 Not Found` even when build and artifact upload succeed.
 
-## Rerun Behavior
+## Workflow Steps
 
-The workflow uses an artifact name derived from `github.run_id` and `github.run_attempt`.
+The checked-in workflow performs:
 
-This avoids a known Pages deployment failure where reruns can leave multiple artifacts named `github-pages` in the same workflow run, causing `actions/deploy-pages` to stop with a duplicate-artifact error.
+1. checkout
+2. Pages configuration
+3. Node 24 setup
+4. dependency install with `npm ci`
+5. unit and integration tests with `npm run test:run`
+6. production build with `npm run build`
+7. Pages artifact upload
+8. Pages deployment
+
+## Artifact Naming
+
+The workflow uses a unique Pages artifact name derived from:
+
+- `github.run_id`
+- `github.run_attempt`
+
+This avoids the duplicate-artifact failure that can happen when older runs are rerun.
+
+## Recommended Release Checklist
+
+1. Run `npm run lint`
+2. Run `npm run test:run`
+3. Run `npm run build`
+4. Run `npm run test:e2e`
+5. Confirm docs and worklog updates are committed
+6. Push to `main`
+7. Verify the Pages workflow succeeds
+8. Open the published site and test `#/` plus at least one `#/game/:slug` route
+
+## Known GitHub Actions Notes
+
+- GitHub currently emits Node 20 deprecation warnings for some first-party actions.
+- Those warnings do not come from this app runtime and do not change the deployed site behavior.

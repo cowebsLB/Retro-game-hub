@@ -1,19 +1,24 @@
 # Documentation Index
 
-## Overview
+Retro Game Hub is a static GitHub Pages arcade hub built around a manifest-driven catalog and original local cabinets. This documentation set is the canonical reference for the current product shape, engineering choices, deployment workflow, and testing posture.
 
-Retro Game Hub is a static retro game library and browser-playable hub hosted through GitHub Pages. The application is built with React, Vite, TypeScript, Tailwind CSS, custom CSS animations, and a runtime-fed JSON update layer for live cabinet metadata. The current release ships only original in-repo cabinets.
+## Primary Docs
 
-## Documentation Map
+- [Architecture](architecture.md): runtime flow, routing model, module boundaries, and content pipeline
+- [Features](features.md): shipped user-facing capabilities and current cabinet lineup
+- [Installation](installation.md): local prerequisites, setup, and run commands
+- [Troubleshooting](troubleshooting.md): common local-dev, test, and deployment failures
+- [Testing](Testing.md): unit, integration, end-to-end, and manual verification guidance
+- [Deployment](Deployment.md): GitHub Pages workflow, repository settings, and release checklist
 
-- [Architecture](architecture.md)
-- [Features](features.md)
-- [Installation](installation.md)
-- [Troubleshooting](troubleshooting.md)
-- [Roadmap](roadmap.md)
-- [API Contract](API.md)
-- [Database Notes](Database.md)
-- [Security](Security.md)
-- [Testing](Testing.md)
-- [Deployment](Deployment.md)
-- [Worklog for 06-07-2026](worklogs/worklog-06-07-2026.md)
+## Reference Docs
+
+- [API Contract](API.md): `GameEntry`, `GameUpdate`, and route contracts
+- [Database Notes](Database.md): current no-database model and browser persistence notes
+- [Security](Security.md): static-hosting security posture and content integrity considerations
+- [Roadmap](roadmap.md): next iteration priorities and known future work
+
+## Release Records
+
+- [Current changelog](../CHANGELOG.md)
+- [Current worklog](worklogs/worklog-06-07-2026.md)

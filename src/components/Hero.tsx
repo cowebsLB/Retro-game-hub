@@ -16,10 +16,8 @@ type HeroProps = {
 export function Hero({ featuredGame, syncMeta }: HeroProps) {
   return (
     <section className="hero-shell px-6 py-10 sm:px-10 sm:py-14" aria-label="Featured game hero">
-      {/* Scanline overlay */}
       <div className="scanline crt-vignette absolute inset-0" aria-hidden="true" />
 
-      {/* Animated ambient particles */}
       <div className="particles-overlay" aria-hidden="true">
         {[...Array(20)].map((_, i) => (
           <div
@@ -30,7 +28,7 @@ export function Hero({ featuredGame, syncMeta }: HeroProps) {
               height: `${1 + Math.random() * 2}px`,
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
-              background: i % 3 === 0 ? '#47f5ff' : i % 3 === 1 ? '#ff4fd8' : '#ffd166',
+              background: i % 3 === 0 ? "#47f5ff" : i % 3 === 1 ? "#ff4fd8" : "#ffd166",
               opacity: 0.3 + Math.random() * 0.4,
               boxShadow: `0 0 ${4 + i}px currentColor`,
               animation: `float-card ${4 + (i % 5)}s ease-in-out infinite`,
@@ -41,7 +39,6 @@ export function Hero({ featuredGame, syncMeta }: HeroProps) {
       </div>
 
       <div className="relative grid items-center gap-10 lg:grid-cols-[1.2fr_0.8fr]">
-        {/* Left column: text */}
         <div className="space-y-6">
           <div className="flex flex-wrap items-center gap-3">
             <span className="section-eyebrow text-cyan-300/80">GitHub Pages Arcade</span>
@@ -53,7 +50,7 @@ export function Hero({ featuredGame, syncMeta }: HeroProps) {
           </h1>
 
           <p className="max-w-2xl text-base leading-8 text-slate-300">
-            Retro Game Hub pairs a static shell with a runtime-fed cabinet manifest —
+            Retro Game Hub pairs a static shell with a runtime-fed cabinet manifest -
             our in-repo titles, patch notes, and metadata keep moving while the site stays GitHub Pages friendly.
           </p>
 
@@ -75,9 +72,9 @@ export function Hero({ featuredGame, syncMeta }: HeroProps) {
 
           <div className="flex flex-wrap gap-2.5">
             {[
-              { label: 'Live runtime manifest', color: 'rgba(255,79,216,0.35)', bg: 'rgba(255,79,216,0.08)' },
-              { label: 'Original-only lineup', color: 'rgba(255,209,102,0.35)', bg: 'rgba(255,209,102,0.08)' },
-              { label: 'Custom cabinets live', color: 'rgba(135,245,91,0.35)', bg: 'rgba(135,245,91,0.08)' },
+              { label: "Live runtime manifest", color: "rgba(255,79,216,0.35)", bg: "rgba(255,79,216,0.08)" },
+              { label: "Original-only lineup", color: "rgba(255,209,102,0.35)", bg: "rgba(255,209,102,0.08)" },
+              { label: "Custom cabinets live", color: "rgba(135,245,91,0.35)", bg: "rgba(135,245,91,0.08)" },
             ].map(({ label, color, bg }) => (
               <span
                 key={label}
@@ -90,7 +87,6 @@ export function Hero({ featuredGame, syncMeta }: HeroProps) {
           </div>
         </div>
 
-        {/* Right column: featured game card */}
         <div className="featured-card p-5">
           <div className="mb-4 flex items-center justify-between">
             <span className="section-eyebrow text-cyan-100/60">Featured Cabinet</span>
@@ -110,7 +106,9 @@ export function Hero({ featuredGame, syncMeta }: HeroProps) {
             <p className="text-sm leading-7 text-slate-300">{featuredGame.description}</p>
             <div className="flex flex-wrap gap-1.5">
               {featuredGame.tags.map((tag) => (
-                <span key={tag} className="tag-chip">{tag}</span>
+                <span key={tag} className="tag-chip">
+                  {tag}
+                </span>
               ))}
             </div>
             <div className="flex items-center justify-between pt-1">

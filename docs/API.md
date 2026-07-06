@@ -1,44 +1,74 @@
 # API Contract
 
-## Public Content Interface
+## Scope
 
-The application does not expose a network API in v1. Its primary public contract is the `GameEntry` manifest schema used by `src/data/games.json`.
+Retro Game Hub does not expose a backend API. Its public integration surface is the in-repo content contract used by the catalog and runtime feeds.
 
-## GameEntry
+## `GameEntry`
 
-- `id: string`
-- `title: string`
-- `slug: string`
-- `description: string`
-- `thumbnail: string`
-- `tags: string[]`
-- `era: string`
-- `players: string`
-- `controls: string[]`
-- `sourceType: "local" | "embed"`
-- `playTarget: string`
-- `featured: boolean`
-- `status: "ready" | "beta"`
-- `version: string`
-- `lastUpdated: string`
-- `releaseNotes: string[]`
+```ts
+type GameEntry = {
+  id: string;
+  title: string;
+  slug: string;
+  description: string;
+  thumbnail: string;
+  tags: string[];
+  era: string;
+  players: string;
+  controls: string[];
+  sourceType: "local" | "embed";
+  playTarget: string;
+  featured: boolean;
+  status: "ready" | "beta";
+  version: string;
+  lastUpdated: string;
+  releaseNotes: string[];
+};
+```
 
-## Update Feed Contract
+### Validation Rules
 
-- `id: string`
-- `gameSlug: string`
-- `title: string`
-- `summary: string`
-- `timestamp: string`
-- `type: "game" | "catalog"`
+- all string fields must be present and non-empty
+- `tags` must be a non-empty string array
+- `controls` must be a non-empty string array
+- `releaseNotes` must be a non-empty string array
+- `featured` must be a boolean
+- `sourceType` must be `local` or `embed`
+- `status` must be `ready` or `beta`
+- `lastUpdated` must be a valid ISO date string
+- `slug` values must be unique across the manifest
+
+## `GameUpdate`
+
+```ts
+type GameUpdate = {
+  id: string;
+  gameSlug: string;
+  title: string;
+  summary: string;
+  timestamp: string;
+  type: "game" | "catalog" | "release" | "patch" | "hotfix" | "feature";
+};
+```
+
+### Validation Rules
+
+- all string fields must be present and non-empty
+- `timestamp` must be a valid ISO date string
+- `type` must match one of the supported update labels
 
 ## Route Contract
 
-- `#/` renders the home and catalog view
-- `#/game/:slug` renders the play page for a specific cabinet
+- `#/`
+- `#/game/:slug`
 
-## Local Game Integration Contract
+## Local Cabinet Contract
 
-- `sourceType: "local"` entries must set `playTarget` to a key registered in `src/lib/localGames.tsx`
-- The registered component is responsible for rendering the playable surface and any cabinet-specific HUD
-- The current shipped manifest uses only local cabinets
+- local entries must use `sourceType: "local"`
+- `playTarget` must resolve through `src/lib/localGames.tsx`
+- the registered component is responsible for rendering its own playable surface and cabinet-specific HUD
+
+## Runtime Feed Contract
+
+The runtime mirror files under `public/data` must remain schema-compatible with the bundled files under `src/data`.

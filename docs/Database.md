@@ -2,13 +2,31 @@
 
 ## Current State
 
-Retro Game Hub does not use a database in v1.
+Retro Game Hub does not use a database in the current release.
 
-## Persistent Data
+## Persistent Data Sources
 
-- Game metadata is stored in `src/data/games.json`
-- Runtime game metadata is mirrored in `public/data/games.json`
-- Runtime update notes are stored in `public/data/updates.json`
-- Static artwork is stored under `public/images`
-- Individual local cabinets use browser `localStorage` for small single-device records such as best score, best distance, or best move count
-- There is no user account storage or backend persistence layer
+- `src/data/games.json`: bundled catalog fallback
+- `src/data/updates.json`: bundled update fallback
+- `public/data/games.json`: runtime catalog mirror
+- `public/data/updates.json`: runtime update mirror
+- `public/images/*`: cabinet art assets
+- browser `localStorage`: cabinet-specific local best records
+
+## Browser Persistence
+
+Current local persistence is intentionally small and device-local:
+
+- `Neon Meteor Run`: best score
+- `Skyline Sprint GX`: best distance
+- `Memory Vault 84`: best move count
+
+`Pixel Breach` does not currently persist a best-run value.
+
+## Non-Goals in the Current Release
+
+- no user accounts
+- no cloud saves
+- no shared leaderboard
+- no analytics database
+- no CMS

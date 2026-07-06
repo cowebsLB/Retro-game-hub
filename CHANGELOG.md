@@ -4,6 +4,23 @@ All notable changes to this project will be documented in this file.
 
 The format is based on Keep a Changelog, and this project follows Semantic Versioning.
 
+## [0.4.1] - 2026-07-06
+
+### Added
+
+- Added screenshot-backed documentation assets for the current home, catalog, desktop cabinet, and mobile cabinet views.
+- Added a production-grade README with badges, cabinet lineup details, setup guidance, deployment notes, and links to the full docs set.
+
+### Changed
+
+- Rewrote the core docs pages so architecture, features, installation, testing, deployment, API, database, security, roadmap, and troubleshooting match the live application.
+- Expanded the current worklogs with the documentation refresh, screenshot capture, and verification results.
+
+### Fixed
+
+- Fixed remaining corrupted user-facing text on the home and play routes so the shipped UI and captured screenshots render cleanly.
+- Corrected documentation drift around the active cabinet count, runtime update contract, and current original-only delivery model.
+
 ## [0.4.0] - 2026-07-06
 
 ### Added

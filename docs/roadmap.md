@@ -2,14 +2,22 @@
 
 ## Near Term
 
-- Add more original local games
-- Add audio, sprite art, and stronger visual polish to the current original cabinets
-- Add more filter dimensions such as status, difficulty, and cabinet type
-- Add cabinet-selective save or progression data where it improves replayability
+- add audio and music for each cabinet
+- replace more programmatic visuals with sprite-driven art where it improves clarity
+- add best-run persistence to `Pixel Breach`
+- expand filter dimensions such as difficulty and cabinet type
+- add more original cabinets
+
+## Mid Term
+
+- improve keyboard accessibility across menus and cabinet shells
+- add visual regression checks for the main routes
+- add richer mobile control affordances for touch-first play
+- deepen game-specific progression hooks where they improve replay value
 
 ## Later
 
-- Optional favorites stored in local storage
-- Better cabinet attribution and rights metadata
-- Additional accessibility and keyboard polish for the local game layer
-- Expanded visual themes and seasonal catalog treatments
+- optional local favorites system
+- seasonal catalog themes
+- richer attribution and build-history metadata
+- optional leaderboard or shared score concept if the project ever adds a backend

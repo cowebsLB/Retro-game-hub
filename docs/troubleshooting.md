@@ -1,37 +1,82 @@
 # Troubleshooting
 
-## Embedded game does not render
+## GitHub Pages deploy fails with `404 Not Found`
 
-Some external sources block iframe playback. Use the built-in `Open in a new tab` action on the play page.
+Cause:
 
-## GitHub Pages route looks broken
+- GitHub Pages is not enabled for the repository
+- Pages is not configured to deploy from `GitHub Actions`
 
-The app uses hash routing. Production links should look like `#/game/<slug>` rather than relying on server-side route rewrites.
+Fix:
 
-## E2E tests fail before launching
+1. Open repository settings
+2. Open Pages
+3. Set the build source to `GitHub Actions`
+4. Trigger a fresh workflow run
 
-The Playwright configuration uses the installed Microsoft Edge channel by default. Confirm Edge is installed and available on the machine.
+## GitHub Pages deploy fails with duplicate `github-pages` artifacts
+
+Cause:
+
+- an older workflow run was rerun after multiple Pages artifacts already existed
+
+Fix:
+
+- trigger a fresh workflow run instead of rerunning the stale failed run
+- keep the current checked-in artifact naming logic in place
+
+## Direct route looks broken in production
+
+Cause:
+
+- the app uses hash routing by design
+
+Fix:
+
+- use `#/game/<slug>` links, not server-style path routing
+
+## Local E2E tests fail to launch a browser
+
+Cause:
+
+- Playwright is configured against the installed Edge channel on this machine
+- Edge may be missing or not discoverable
+
+Fix:
+
+- install Microsoft Edge
+- rerun `npm run test:e2e`
+
+## Runtime feed looks stale
+
+Cause:
+
+- `public/data/games.json` or `public/data/updates.json` was not updated
+- runtime payloads became invalid and the app stayed on the bundled fallback
+
+Fix:
+
+- validate both JSON files
+- ensure schema fields match the current contracts
+- reload the page and confirm the sync state updates
 
 ## Thumbnails do not load in production
 
-Ensure the manifest thumbnail path is relative, such as `images/example.svg`, so the Vite base path can be applied correctly.
+Cause:
 
-## Runtime feed does not refresh
+- the manifest path does not resolve cleanly under the GitHub Pages base path
 
-Confirm both `public/data/games.json` and `public/data/updates.json` are valid JSON and that any new fields still satisfy the `GameEntry` and update feed contracts.
+Fix:
 
-## GitHub Pages deploy fails with 404
+- keep asset paths relative, such as `images/pixel-breach.jpg`
 
-If the workflow fails during `actions/deploy-pages` with `Failed to create deployment (status: 404)`, enable GitHub Pages in the repository first:
+## UI text shows corrupted characters
 
-- Open repository settings
-- Open Pages
-- Set the build source to `GitHub Actions`
+Cause:
 
-The workflow also expects the standard Pages setup step `actions/configure-pages`, which is included in the repository workflow.
+- source files or JSON content were saved with the wrong encoding or corrupted punctuation
 
-## GitHub Pages deploy fails with multiple artifacts named github-pages
+Fix:
 
-If `actions/deploy-pages` reports that multiple artifacts named `github-pages` were found, the workflow run has more than one Pages artifact attached, usually after reruns.
-
-The repository workflow now uses a unique artifact name per run attempt to prevent that collision. If the failing run was created before this fix, trigger a fresh workflow run instead of rerunning the old one.
+- normalize user-facing copy to clean UTF-8 or ASCII-safe text
+- rebuild and spot-check the affected route

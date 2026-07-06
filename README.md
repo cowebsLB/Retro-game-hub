@@ -1,37 +1,89 @@
 # Retro Game Hub
 
-Retro Game Hub is a static React arcade library built for GitHub Pages. Players can browse a retro-styled catalog, filter games by tag or release notes, open a dedicated play page, and launch original in-repo games without leaving the site shell.
+[![Version](https://img.shields.io/badge/version-0.4.1-47f5ff?style=for-the-badge)](CHANGELOG.md)
+[![Node](https://img.shields.io/badge/node-24%2B-87f55b?style=for-the-badge)](docs/installation.md)
+[![React](https://img.shields.io/badge/react-19-61dafb?style=for-the-badge)](package.json)
+[![Vite](https://img.shields.io/badge/vite-8-ffd166?style=for-the-badge)](package.json)
+[![License](https://img.shields.io/badge/license-Apache%202.0-f97316?style=for-the-badge)](LICENSE)
 
-## Highlights
+Retro Game Hub is a static arcade library built for GitHub Pages. The app lets players browse a custom-built cabinet catalog, search and filter the lineup, open a dedicated game route, and play original in-repo browser games without leaving the site shell.
 
-- React + Vite + TypeScript single-page app
-- Tailwind CSS with custom retro animation styling
-- Hash routing for GitHub Pages compatibility
-- Runtime-fed catalog and update rail backed by JSON
-- Original-only game lineup powered by a reusable local cabinet registry
-- Three custom cabinets, including two canvas action games and one puzzle game
-- Shared cabinet-shell graphics, richer HUD panels, and stronger game-specific visual identity
-- Automated unit, integration, and E2E test coverage
-- GitHub Actions Pages deployment workflow
+## What Ships Today
+
+- Original-only cabinet lineup with four playable local games
+- React + Vite + TypeScript single-page app with hash routing
+- Tailwind CSS plus custom CRT, glow, and cabinet animation styling
+- Runtime-fed catalog and update rail backed by static JSON
+- Dedicated play pages with release notes, controls, and metadata
+- Unit, integration, and end-to-end coverage
+- GitHub Pages deployment workflow for static publishing
+
+## Screenshots
+
+### Home Hero
+
+![Retro Game Hub home hero](docs/assets/screenshots/home-hero.png)
+
+### Catalog Grid
+
+![Retro Game Hub catalog grid](docs/assets/screenshots/catalog-grid.png)
+
+### Cabinet Play Page
+
+![Pixel Breach play page](docs/assets/screenshots/pixel-breach-page.png)
+
+### Mobile Cabinet Layout
+
+![Memory Vault 84 mobile play page](docs/assets/screenshots/memory-vault-mobile.png)
+
+## Cabinet Lineup
+
+| Cabinet | Genre | Core Loop | Status |
+| --- | --- | --- | --- |
+| `Neon Meteor Run` | Arcade dodge survival | Avoid meteor waves, trigger pulse bursts, collect sparks and shields | `ready` |
+| `Skyline Sprint GX` | Reflex lane runner | Weave traffic, collect energy cells, spend boost cleanly | `ready` |
+| `Memory Vault 84` | Memory puzzle | Match mirrored glyph pairs in the fewest moves possible | `ready` |
+| `Pixel Breach` | Arcade shooter | Clear enemy formations, chain lasers, manage shields across waves | `ready` |
 
 ## Stack
 
-- Node.js
+- Node.js 24+
 - React 19
-- TypeScript
-- Vite
+- TypeScript 6
+- Vite 8
+- React Router with hash routes
 - Tailwind CSS via `@tailwindcss/vite`
-- React Router
+- Custom CSS for cabinet chrome, glow passes, scanlines, and motion
 - Vitest + Testing Library
 - Playwright
 
-## Local Development
+## Project Structure
+
+```text
+.
+├─ docs/                    Project documentation and dated worklogs
+├─ public/
+│  ├─ data/                 Runtime-fed catalog and update JSON
+│  └─ images/               Cabinet thumbnail and promo art
+├─ src/
+│  ├─ components/           Shell, hero, filters, cards, player surfaces
+│  ├─ data/                 Bundled manifest fallback
+│  ├─ games/                Local playable cabinet implementations
+│  ├─ hooks/                Runtime feed polling
+│  ├─ lib/                  Catalog parsing, validation, filtering helpers
+│  ├─ routes/               Home, game, and not-found pages
+│  └─ types/                Shared app contracts
+├─ tests/e2e/               Playwright browser flows
+└─ .github/workflows/       GitHub Pages deployment automation
+```
+
+## Getting Started
 
 ### Prerequisites
 
 - Node.js 24 or newer
 - npm 11 or newer
-- Microsoft Edge installed locally for the default Playwright E2E profile on Windows
+- Microsoft Edge installed locally for the checked-in Playwright configuration on Windows
 
 ### Install
 
@@ -39,26 +91,49 @@ Retro Game Hub is a static React arcade library built for GitHub Pages. Players 
 npm install
 ```
 
-### Run the app
+### Run Locally
 
 ```bash
 npm run dev
 ```
 
-Open `http://localhost:5173/` during local development.
+Open `http://localhost:5173/` in development.
 
-## Scripts
+### Production Build
+
+```bash
+npm run build
+```
+
+### Preview Production Output
+
+```bash
+npm run preview
+```
+
+## Available Scripts
 
 - `npm run dev` starts the Vite dev server
-- `npm run build` runs TypeScript compilation and builds the production site
-- `npm run preview` serves the built app locally
+- `npm run build` runs TypeScript compilation and creates the production build
+- `npm run preview` serves the built `dist/` output locally
 - `npm run lint` runs Oxlint
-- `npm run test:run` runs the Vitest unit and integration suite once
-- `npm run test:e2e` runs the Playwright end-to-end suite
+- `npm run test` starts Vitest in watch mode
+- `npm run test:run` runs the Vitest suite once
+- `npm run test:e2e` runs the Playwright suite
 
-## Game Catalog Contract
+## Content Model
 
-Games are sourced from [`src/data/games.json`](src/data/games.json) as the bundled fallback and [`public/data/games.json`](public/data/games.json) as the runtime feed. Each entry follows the `GameEntry` contract:
+The catalog is driven by `GameEntry` records stored in both:
+
+- [`src/data/games.json`](src/data/games.json) for bundled build-time fallback
+- [`public/data/games.json`](public/data/games.json) for runtime refresh
+
+The update rail is driven by:
+
+- [`src/data/updates.json`](src/data/updates.json)
+- [`public/data/updates.json`](public/data/updates.json)
+
+Each game record includes:
 
 - `id`
 - `title`
@@ -77,27 +152,52 @@ Games are sourced from [`src/data/games.json`](src/data/games.json) as the bundl
 - `lastUpdated`
 - `releaseNotes`
 
-Recent cabinet changes are surfaced through [`public/data/updates.json`](public/data/updates.json) and polled at runtime by the client.
+The current shipped lineup is intentionally `local` only. The broader contract still supports future `embed` entries, but that path is not active in the present release.
 
-`sourceType` supports:
+## Adding or Updating a Cabinet
 
-- `local` for an in-repo playable implementation
-- `embed` for an external game loaded in an iframe with fallback open-tab behavior
+1. Update both manifest files: [`src/data/games.json`](src/data/games.json) and [`public/data/games.json`](public/data/games.json).
+2. Update both feed files if release notes or update-rail copy changed: [`src/data/updates.json`](src/data/updates.json) and [`public/data/updates.json`](public/data/updates.json).
+3. Add or refresh cabinet art in [`public/images`](public/images).
+4. If the game is local, register its `playTarget` in [`src/lib/localGames.tsx`](src/lib/localGames.tsx).
+5. Verify route lookup, search, and update rendering.
+6. Run:
 
-The current shipped lineup is intentionally `local` only.
+```bash
+npm run lint
+npm run test:run
+npm run build
+npm run test:e2e
+```
 
-## Adding a Game
+## Testing
 
-1. Add or update the game entry in both [`src/data/games.json`](src/data/games.json) and [`public/data/games.json`](public/data/games.json).
-2. Add a matching update item to [`public/data/updates.json`](public/data/updates.json) when the change is user-visible.
-3. Add matching thumbnail artwork under [`public/images`](public/images).
-4. If the game is local, register its implementation in [`src/lib/localGames.tsx`](src/lib/localGames.tsx).
-5. Verify the runtime feed still parses and refreshes correctly.
-6. Run `npm run test:run`, `npm run build`, and `npm run test:e2e`.
+The current test stack covers:
+
+- Manifest and runtime-feed parsing
+- Search and tag filtering
+- Slug lookup and missing-cabinet handling
+- Catalog rendering and route navigation
+- Local cabinet registry lookup
+- Direct cabinet route rendering
+- Runtime feed UI behavior
+
+See [docs/Testing.md](docs/Testing.md) for the detailed test plan and current gaps.
 
 ## Deployment
 
-Production builds use the Vite base path `/Retro-game-hub/` so the app resolves correctly on GitHub Pages. The workflow in [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) installs dependencies, runs the Vitest suite, builds the static site, and deploys the `dist/` artifact to GitHub Pages. The app then fetches `public/data` assets at runtime for live catalog refresh behavior.
+The app is built for GitHub Pages and uses:
+
+- Vite base path: `/Retro-game-hub/`
+- Hash routing: `#/` and `#/game/:slug`
+- GitHub Actions workflow: [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml)
+
+Important repository setting:
+
+- GitHub Pages must be enabled in repository settings
+- Build source must be set to `GitHub Actions`
+
+See [docs/Deployment.md](docs/Deployment.md) for the full publish checklist and Pages failure notes.
 
 ## Documentation
 
@@ -105,12 +205,22 @@ Production builds use the Vite base path `/Retro-game-hub/` so the app resolves 
 - [Architecture](docs/architecture.md)
 - [Features](docs/features.md)
 - [Installation](docs/installation.md)
+- [Troubleshooting](docs/troubleshooting.md)
 - [Testing](docs/Testing.md)
 - [Deployment](docs/Deployment.md)
+- [API contract](docs/API.md)
+- [Database notes](docs/Database.md)
 - [Security](docs/Security.md)
-- [Troubleshooting](docs/troubleshooting.md)
-- [Worklog](docs/worklogs/worklog-06-07-2026.md)
+- [Roadmap](docs/roadmap.md)
+- [Current worklog](docs/worklogs/worklog-06-07-2026.md)
+
+## Release Snapshot
+
+- App version: `0.4.1`
+- Catalog size: `4` original cabinets
+- Hosting target: GitHub Pages
+- Runtime model: static app plus runtime-polled JSON feeds
 
 ## License
 
-This project is licensed under the Apache License 2.0. See [LICENSE](LICENSE) for the full text.
+Licensed under the Apache License 2.0. See [LICENSE](LICENSE).

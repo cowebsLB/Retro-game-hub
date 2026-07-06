@@ -27,13 +27,11 @@ export function HomePage({ feed }: HomePageProps) {
   return (
     <main className="flex-1 py-6 sm:py-8 page-enter" id="main-content">
       <div className="space-y-10">
-        {/* Hero */}
         <Hero
           featuredGame={featuredGame}
           syncMeta={{ syncing: feed.syncing, source: feed.source, lastSyncLabel, error: feed.error }}
         />
 
-        {/* How It Works */}
         <section
           className="grid gap-4 sm:grid-cols-3"
           id="how-to-play"
@@ -45,26 +43,26 @@ export function HomePage({ feed }: HomePageProps) {
               accent: "text-cyan-300/80",
               title: "Browse cabinets",
               body: "Filter by tag, era, release notes, or player mode to find your match.",
-              icon: "🎮",
+              icon: "Arc",
             },
             {
               step: "02",
               accent: "text-pink-300/80",
               title: "Open the play page",
               body: "Each cabinet has metadata, patch notes, controls, and a launch area.",
-              icon: "🚀",
+              icon: "Go",
             },
             {
               step: "03",
               accent: "text-yellow-300/80",
               title: "Play the original",
-              body: "All games are custom-built in-repo — no embeds, no external links needed.",
-              icon: "⚡",
+              body: "All games are custom-built in-repo - no embeds, no external links needed.",
+              icon: "CRT",
             },
           ].map(({ step, accent, title, body, icon }) => (
             <div key={step} className="how-step">
               <div className="mb-3 flex items-center gap-3">
-                <span className="text-2xl">{icon}</span>
+                <span className="pixel-title text-[0.6rem] text-cyan-100">{icon}</span>
                 <p className={`section-eyebrow ${accent}`}>{step}</p>
               </div>
               <h2 className="text-lg font-bold text-white">{title}</h2>
@@ -73,10 +71,8 @@ export function HomePage({ feed }: HomePageProps) {
           ))}
         </section>
 
-        {/* Updates rail */}
         <UpdatesRail updates={feed.updates} />
 
-        {/* Library / Catalog */}
         <section className="space-y-6" id="catalog" aria-label="Game catalog">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
@@ -86,7 +82,7 @@ export function HomePage({ feed }: HomePageProps) {
               </h2>
             </div>
             <p className="max-w-xl text-sm leading-7 text-slate-400">
-              Every cabinet in this library is hand-built and lives right in the repository — no third-party embeds, fully static-host compatible.
+              Every cabinet in this library is hand-built and lives right in the repository - no third-party embeds, fully static-host compatible.
             </p>
           </div>
 
