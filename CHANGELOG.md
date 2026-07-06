@@ -20,6 +20,7 @@ The format is based on Keep a Changelog, and this project follows Semantic Versi
 ### Fixed
 
 - Updated the GitHub Pages workflow to include the standard Pages configuration step and documented the required repository Pages setting for successful deployments.
+- Updated the Pages workflow to use a unique artifact name per workflow attempt so reruns do not fail with duplicate `github-pages` artifacts.
 
 ## [0.2.0] - 2026-07-06
 

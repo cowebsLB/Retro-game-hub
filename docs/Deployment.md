@@ -36,3 +36,9 @@ Expected setting:
 - Build and deployment source: GitHub Actions
 
 If that setting has never been enabled, `actions/deploy-pages` can fail with a `404 Not Found` while trying to create the deployment even if the build and artifact upload succeed.
+
+## Rerun Behavior
+
+The workflow uses an artifact name derived from `github.run_id` and `github.run_attempt`.
+
+This avoids a known Pages deployment failure where reruns can leave multiple artifacts named `github-pages` in the same workflow run, causing `actions/deploy-pages` to stop with a duplicate-artifact error.

@@ -29,3 +29,9 @@ If the workflow fails during `actions/deploy-pages` with `Failed to create deplo
 - Set the build source to `GitHub Actions`
 
 The workflow also expects the standard Pages setup step `actions/configure-pages`, which is included in the repository workflow.
+
+## GitHub Pages deploy fails with multiple artifacts named github-pages
+
+If `actions/deploy-pages` reports that multiple artifacts named `github-pages` were found, the workflow run has more than one Pages artifact attached, usually after reruns.
+
+The repository workflow now uses a unique artifact name per run attempt to prevent that collision. If the failing run was created before this fix, trigger a fresh workflow run instead of rerunning the old one.
