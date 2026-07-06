@@ -1,0 +1,96 @@
+[
+  {
+    "id": "neon-meteor-run",
+    "title": "Neon Meteor Run",
+    "slug": "neon-meteor-run",
+    "description": "A polished local arcade survival run with pulse bursts, shield pickups, combo sparks, and escalating meteor waves.",
+    "thumbnail": "images/neon-meteor-run.svg",
+    "tags": ["Arcade", "Dodge", "Local"],
+    "era": "1980s",
+    "players": "1 Player",
+    "controls": [
+      "Arrow keys or WASD to steer",
+      "Press Space to trigger a pulse burst",
+      "Collect sparks to stack score and survive the full timer"
+    ],
+    "sourceType": "local",
+    "playTarget": "neon-meteor-run",
+    "featured": true,
+    "status": "ready",
+    "version": "1.2.0",
+    "lastUpdated": "2026-07-06T00:00:00.000Z",
+    "releaseNotes": [
+      "Upgraded the flagship game to a canvas-driven arcade run with pulse attacks and health-based survival.",
+      "Added combo scoring, shield pickups, local high-score persistence, and escalating meteor intensity."
+    ]
+  },
+  {
+    "id": "hextris-arcade",
+    "title": "Hextris Archive Cabinet",
+    "slug": "hextris-archive-cabinet",
+    "description": "An embedded reflex puzzle experience powered by an external arcade-compatible browser build.",
+    "thumbnail": "images/hextris-archive-cabinet.svg",
+    "tags": ["Puzzle", "Embed", "Arcade"],
+    "era": "2010s",
+    "players": "1 Player",
+    "controls": [
+      "Rotate left and right",
+      "Match colors on the hexagon",
+      "Use the backup open-tab link if embedding fails"
+    ],
+    "sourceType": "embed",
+    "playTarget": "https://hextris.github.io/hextris/",
+    "featured": false,
+    "status": "beta",
+    "version": "0.9.0",
+    "lastUpdated": "2026-07-05T20:00:00.000Z",
+    "releaseNotes": [
+      "Added cabinet metadata and runtime status cards.",
+      "Embed fallback now surfaces a direct open-tab action."
+    ]
+  },
+  {
+    "id": "oregon-trail-archive",
+    "title": "Oregon Trail Archive",
+    "slug": "oregon-trail-archive",
+    "description": "A museum-style archive embed that brings a landmark DOS journey directly into the hub.",
+    "thumbnail": "images/oregon-trail-archive.svg",
+    "tags": ["Adventure", "Archive", "Embed"],
+    "era": "1970s",
+    "players": "1 Player",
+    "controls": [
+      "Use the game window controls",
+      "Follow the on-screen prompts",
+      "Open in a new tab if the emulator is blocked"
+    ],
+    "sourceType": "embed",
+    "playTarget": "https://archive.org/embed/msdos_Oregon_Trail_The_1990",
+    "featured": false,
+    "status": "ready",
+    "version": "1.0.0",
+    "lastUpdated": "2026-07-05T18:30:00.000Z",
+    "releaseNotes": [
+      "Catalog copy and archive positioning refreshed for the new live feed layout."
+    ]
+  },
+  {
+    "id": "pixel-drift-2099",
+    "title": "Pixel Drift 2099",
+    "slug": "pixel-drift-2099",
+    "description": "A future-ready catalog slot for another fast twitch cabinet racer coming next.",
+    "thumbnail": "images/pixel-drift-2099.svg",
+    "tags": ["Racing", "Coming Soon"],
+    "era": "1990s",
+    "players": "1-2 Players",
+    "controls": ["Preview only in v1"],
+    "sourceType": "embed",
+    "playTarget": "https://archive.org/embed/arcade_mspacman",
+    "featured": false,
+    "status": "beta",
+    "version": "0.3.0",
+    "lastUpdated": "2026-07-04T16:00:00.000Z",
+    "releaseNotes": [
+      "Roadmap teaser added to the live cabinet feed."
+    ]
+  }
+]

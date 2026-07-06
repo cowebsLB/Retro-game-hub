@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">Hextris Archive Cabinet art</title>
+  <desc id="desc">Neon hexagon puzzle poster styled as an arcade cabinet marquee.</desc>
+  <rect width="1200" height="800" fill="#0a0d24"/>
+  <circle cx="600" cy="400" r="280" fill="#10153b"/>
+  <g stroke="#47f5ff" stroke-width="18" fill="none">
+    <polygon points="600,210 770,305 770,495 600,590 430,495 430,305"/>
+    <polygon points="600,260 725,330 725,470 600,540 475,470 475,330"/>
+  </g>
+  <g fill="#ff4fd8" opacity="0.9">
+    <polygon points="600,260 725,330 600,400"/>
+    <polygon points="600,400 725,470 600,540"/>
+  </g>
+  <g fill="#47f5ff" opacity="0.85">
+    <polygon points="600,260 475,330 600,400"/>
+    <polygon points="600,400 475,470 600,540"/>
+  </g>
+  <text x="120" y="134" fill="#f8f5ec" font-family="'Arial Black', sans-serif" font-size="78" letter-spacing="6">
+    HEXTRIS ARCHIVE
+  </text>
+  <text x="124" y="190" fill="#b4c6ff" font-family="Arial, sans-serif" font-size="28" letter-spacing="4">
+    EMBEDDED PUZZLE CABINET FOR QUICK REFLEX SESSIONS
+  </text>
+</svg>

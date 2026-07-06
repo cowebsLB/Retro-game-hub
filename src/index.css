@@ -1,0 +1,144 @@
+@import "@fontsource/chakra-petch/400.css";
+@import "@fontsource/chakra-petch/500.css";
+@import "@fontsource/chakra-petch/600.css";
+@import "@fontsource/press-start-2p";
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Press Start 2P", monospace;
+  --font-sans: "Chakra Petch", sans-serif;
+  --color-arcade-ink: #f8f5ec;
+  --color-arcade-night: #130f2b;
+  --color-arcade-panel: #1f1742;
+  --color-arcade-panel-strong: #2a2060;
+  --color-arcade-cyan: #47f5ff;
+  --color-arcade-pink: #ff4fd8;
+  --color-arcade-gold: #ffd166;
+  --color-arcade-green: #87f55b;
+}
+
+:root {
+  color: var(--color-arcade-ink);
+  background:
+    radial-gradient(circle at top, rgba(71, 245, 255, 0.12), transparent 30%),
+    radial-gradient(circle at 80% 10%, rgba(255, 79, 216, 0.18), transparent 24%),
+    linear-gradient(180deg, #120d28 0%, #090512 100%);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  font-family: var(--font-sans);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.arcade-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-position: center;
+  background-size: 44px 44px;
+}
+
+.scanline::after {
+  pointer-events: none;
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.02),
+    rgba(255, 255, 255, 0.02) 50%,
+    rgba(0, 0, 0, 0.05) 50%,
+    rgba(0, 0, 0, 0.05)
+  );
+  background-size: 100% 4px;
+  mix-blend-mode: soft-light;
+  opacity: 0.7;
+}
+
+.glow-frame {
+  box-shadow:
+    0 0 0 1px rgba(71, 245, 255, 0.18),
+    0 0 22px rgba(71, 245, 255, 0.12),
+    0 18px 40px rgba(8, 5, 21, 0.5);
+}
+
+.pixel-title {
+  font-family: var(--font-display);
+  letter-spacing: 0.08em;
+  line-height: 1.45;
+}
+
+.float-card {
+  animation: float-card 5.4s ease-in-out infinite;
+}
+
+.marquee-glow {
+  animation: marquee-glow 2.8s ease-in-out infinite alternate;
+}
+
+@keyframes float-card {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes marquee-glow {
+  from {
+    box-shadow:
+      0 0 0 1px rgba(255, 79, 216, 0.25),
+      0 0 16px rgba(255, 79, 216, 0.2);
+  }
+  to {
+    box-shadow:
+      0 0 0 1px rgba(71, 245, 255, 0.32),
+      0 0 28px rgba(71, 245, 255, 0.2);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .float-card,
+  .marquee-glow {
+    animation: none;
+  }
+}

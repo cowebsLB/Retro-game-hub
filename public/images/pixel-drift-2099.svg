@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="title desc">
+  <title id="title">Pixel Drift 2099 art</title>
+  <desc id="desc">Future arcade racer concept art with neon car streaks.</desc>
+  <rect width="1200" height="800" fill="#080914"/>
+  <path d="M0 620 L1200 520 V800 H0Z" fill="#111b48"/>
+  <path d="M160 720 L1080 560" stroke="#47f5ff" stroke-width="14"/>
+  <path d="M260 760 L1140 610" stroke="#ff4fd8" stroke-width="10"/>
+  <g transform="translate(430 430)">
+    <path d="M0 120 L90 40 H250 L360 120 L250 160 H40Z" fill="#ffd166"/>
+    <rect x="104" y="54" width="112" height="44" rx="12" fill="#1f1742"/>
+    <circle cx="70" cy="154" r="34" fill="#1f1742"/>
+    <circle cx="286" cy="154" r="34" fill="#1f1742"/>
+  </g>
+  <text x="88" y="126" fill="#f8f5ec" font-family="'Arial Black', sans-serif" font-size="82" letter-spacing="6">
+    PIXEL DRIFT 2099
+  </text>
+  <text x="96" y="182" fill="#c1c8ff" font-family="Arial, sans-serif" font-size="28" letter-spacing="4">
+    NEXT CABINET IN THE RELEASE ROADMAP
+  </text>
+</svg>
