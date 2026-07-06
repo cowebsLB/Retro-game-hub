@@ -4,7 +4,7 @@
     "title": "Neon Meteor Run",
     "slug": "neon-meteor-run",
     "description": "A polished local arcade survival run with pulse bursts, shield pickups, combo sparks, and escalating meteor waves.",
-    "thumbnail": "images/neon-meteor-run.svg",
+    "thumbnail": "images/neon-meteor-run.jpg",
     "tags": ["Arcade", "Dodge", "Local"],
     "era": "1980s",
     "players": "1 Player",
@@ -17,80 +17,86 @@
     "playTarget": "neon-meteor-run",
     "featured": true,
     "status": "ready",
-    "version": "1.2.0",
-    "lastUpdated": "2026-07-06T00:00:00.000Z",
+    "version": "1.4.0",
+    "lastUpdated": "2026-07-06T03:55:00.000Z",
     "releaseNotes": [
-      "Upgraded the flagship game to a canvas-driven arcade run with pulse attacks and health-based survival.",
-      "Added combo scoring, shield pickups, local high-score persistence, and escalating meteor intensity."
+      "v1.4.0: Overhauled visuals - particle explosions, screen shake, animated ship thruster, and comet trails on meteors.",
+      "v1.3.0: Pulse attacks, shield pickups, local best tracking, and escalating meteor intensity are all live."
     ]
   },
   {
-    "id": "hextris-arcade",
-    "title": "Hextris Archive Cabinet",
-    "slug": "hextris-archive-cabinet",
-    "description": "An embedded reflex puzzle experience powered by an external arcade-compatible browser build.",
-    "thumbnail": "images/hextris-archive-cabinet.svg",
-    "tags": ["Puzzle", "Embed", "Arcade"],
-    "era": "2010s",
+    "id": "skyline-sprint-gx",
+    "title": "Skyline Sprint GX",
+    "slug": "skyline-sprint-gx",
+    "description": "A custom neon expressway runner where you weave through traffic, bank boost cells, and try to clear the night route intact.",
+    "thumbnail": "images/skyline-sprint-gx.jpg",
+    "tags": ["Racing", "Reflex", "Local"],
+    "era": "1990s",
     "players": "1 Player",
     "controls": [
-      "Rotate left and right",
-      "Match colors on the hexagon",
-      "Use the backup open-tab link if embedding fails"
+      "Use Left and Right or A and D to switch lanes",
+      "Hold Up, W, or Space to spend boost charge",
+      "Collect energy cells and avoid traffic collisions"
     ],
-    "sourceType": "embed",
-    "playTarget": "https://hextris.github.io/hextris/",
+    "sourceType": "local",
+    "playTarget": "skyline-sprint-gx",
     "featured": false,
-    "status": "beta",
-    "version": "0.9.0",
-    "lastUpdated": "2026-07-05T20:00:00.000Z",
+    "status": "ready",
+    "version": "1.1.0",
+    "lastUpdated": "2026-07-06T03:55:00.000Z",
     "releaseNotes": [
-      "Added cabinet metadata and runtime status cards.",
-      "Embed fallback now surfaces a direct open-tab action."
+      "v1.1.0: Visual overhaul - animated city buildings, glowing vehicle details, rain effect, and boost jet trails.",
+      "v1.0.0: Original lane runner with boost management and multi-lane traffic pressure."
     ]
   },
   {
-    "id": "oregon-trail-archive",
-    "title": "Oregon Trail Archive",
-    "slug": "oregon-trail-archive",
-    "description": "A museum-style archive embed that brings a landmark DOS journey directly into the hub.",
-    "thumbnail": "images/oregon-trail-archive.svg",
-    "tags": ["Adventure", "Archive", "Embed"],
-    "era": "1970s",
+    "id": "memory-vault-84",
+    "title": "Memory Vault 84",
+    "slug": "memory-vault-84",
+    "description": "A custom cipher-grid puzzle cabinet where you reveal mirrored glyph pairs and chase a lower move count every run.",
+    "thumbnail": "images/memory-vault-84.jpg",
+    "tags": ["Puzzle", "Memory", "Local"],
+    "era": "1980s",
     "players": "1 Player",
     "controls": [
-      "Use the game window controls",
-      "Follow the on-screen prompts",
-      "Open in a new tab if the emulator is blocked"
+      "Click or tap tiles to reveal hidden glyphs",
+      "Match two identical symbols to lock a pair",
+      "Clear all six pairs in as few moves as possible"
     ],
-    "sourceType": "embed",
-    "playTarget": "https://archive.org/embed/msdos_Oregon_Trail_The_1990",
+    "sourceType": "local",
+    "playTarget": "memory-vault-84",
+    "featured": false,
+    "status": "ready",
+    "version": "1.1.0",
+    "lastUpdated": "2026-07-06T03:55:00.000Z",
+    "releaseNotes": [
+      "v1.1.0: Visual overhaul - animated flip cards, glyph glow effects, and match celebration particles.",
+      "v1.0.0: Original 12-card mirrored vault grid with local best-move tracking."
+    ]
+  },
+  {
+    "id": "pixel-breach",
+    "title": "Pixel Breach",
+    "slug": "pixel-breach",
+    "description": "A neon space shooter where you intercept alien formations, chain laser combos, collect golden shields, and hold the line against escalating enemy waves.",
+    "thumbnail": "images/pixel-breach.jpg",
+    "tags": ["Shooter", "Arcade", "Local"],
+    "era": "1980s",
+    "players": "1 Player",
+    "controls": [
+      "Arrow keys or A and D to move your fighter left and right",
+      "Space or Z to fire lasers and hold to auto-fire",
+      "Collect golden shields to temporarily protect your hull"
+    ],
+    "sourceType": "local",
+    "playTarget": "pixel-breach",
     "featured": false,
     "status": "ready",
     "version": "1.0.0",
-    "lastUpdated": "2026-07-05T18:30:00.000Z",
+    "lastUpdated": "2026-07-06T03:55:00.000Z",
     "releaseNotes": [
-      "Catalog copy and archive positioning refreshed for the new live feed layout."
-    ]
-  },
-  {
-    "id": "pixel-drift-2099",
-    "title": "Pixel Drift 2099",
-    "slug": "pixel-drift-2099",
-    "description": "A future-ready catalog slot for another fast twitch cabinet racer coming next.",
-    "thumbnail": "images/pixel-drift-2099.svg",
-    "tags": ["Racing", "Coming Soon"],
-    "era": "1990s",
-    "players": "1-2 Players",
-    "controls": ["Preview only in v1"],
-    "sourceType": "embed",
-    "playTarget": "https://archive.org/embed/arcade_mspacman",
-    "featured": false,
-    "status": "beta",
-    "version": "0.3.0",
-    "lastUpdated": "2026-07-04T16:00:00.000Z",
-    "releaseNotes": [
-      "Roadmap teaser added to the live cabinet feed."
+      "v1.0.0: Brand new original Space Invaders-inspired shooter cabinet.",
+      "Features enemy formations, laser chains, shield pickups, explosions, and escalating wave difficulty."
     ]
   }
 ]

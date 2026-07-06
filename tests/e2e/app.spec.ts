@@ -10,9 +10,17 @@ test("loads the catalog, filters, and opens the local game", async ({ page }) =>
   await expect(page.getByLabel("Local game arena")).toBeVisible();
 });
 
-test("supports direct game routes and external embed actions", async ({ page }) => {
-  await page.goto("/#/game/oregon-trail-archive");
-  await expect(page.getByRole("heading", { name: /oregon trail archive/i })).toBeVisible();
-  await expect(page.getByTitle(/oregon trail archive embedded game/i)).toBeVisible();
-  await expect(page.getByRole("link", { name: /open in a new tab/i }).first()).toBeVisible();
+test("supports direct custom game routes", async ({ page }) => {
+  await page.goto("/#/game/memory-vault-84");
+  await expect(page.getByRole("heading", { name: /memory vault 84/i })).toBeVisible();
+  await expect(page.getByLabel(/memory vault 84 puzzle grid/i)).toBeVisible();
+  await page.getByRole("button", { name: /^Hidden vault card 1$/i }).click();
+  await expect(page.getByLabel(/glyph/i)).toBeVisible();
+});
+
+test("supports the pixel breach direct route", async ({ page }) => {
+  await page.goto("/#/game/pixel-breach");
+  await expect(page.getByRole("heading", { name: /pixel breach/i })).toBeVisible();
+  await expect(page.getByLabel(/pixel breach game arena/i)).toBeVisible();
+  await expect(page.getByText(/combat systems/i)).toBeVisible();
 });

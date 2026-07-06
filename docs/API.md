@@ -36,3 +36,9 @@ The application does not expose a network API in v1. Its primary public contract
 
 - `#/` renders the home and catalog view
 - `#/game/:slug` renders the play page for a specific cabinet
+
+## Local Game Integration Contract
+
+- `sourceType: "local"` entries must set `playTarget` to a key registered in `src/lib/localGames.tsx`
+- The registered component is responsible for rendering the playable surface and any cabinet-specific HUD
+- The current shipped manifest uses only local cabinets

@@ -1,6 +1,6 @@
 # Retro Game Hub
 
-Retro Game Hub is a static React arcade library built for GitHub Pages. Players can browse a retro-styled catalog, filter games by tag or release notes, open a dedicated play page, and launch either an in-repo local game or an embedded external browser game without leaving the site shell.
+Retro Game Hub is a static React arcade library built for GitHub Pages. Players can browse a retro-styled catalog, filter games by tag or release notes, open a dedicated play page, and launch original in-repo games without leaving the site shell.
 
 ## Highlights
 
@@ -8,8 +8,9 @@ Retro Game Hub is a static React arcade library built for GitHub Pages. Players 
 - Tailwind CSS with custom retro animation styling
 - Hash routing for GitHub Pages compatibility
 - Runtime-fed catalog and update rail backed by JSON
-- Mixed game delivery model with local and embedded cabinets
-- Canvas-powered flagship local game with score persistence
+- Original-only game lineup powered by a reusable local cabinet registry
+- Three custom cabinets, including two canvas action games and one puzzle game
+- Shared cabinet-shell graphics, richer HUD panels, and stronger game-specific visual identity
 - Automated unit, integration, and E2E test coverage
 - GitHub Actions Pages deployment workflow
 
@@ -83,12 +84,14 @@ Recent cabinet changes are surfaced through [`public/data/updates.json`](public/
 - `local` for an in-repo playable implementation
 - `embed` for an external game loaded in an iframe with fallback open-tab behavior
 
+The current shipped lineup is intentionally `local` only.
+
 ## Adding a Game
 
 1. Add or update the game entry in both [`src/data/games.json`](src/data/games.json) and [`public/data/games.json`](public/data/games.json).
 2. Add a matching update item to [`public/data/updates.json`](public/data/updates.json) when the change is user-visible.
 3. Add matching thumbnail artwork under [`public/images`](public/images).
-4. If the game is local, wire its implementation into [`src/components/GamePlayer.tsx`](src/components/GamePlayer.tsx) or the local game registry path you extend next.
+4. If the game is local, register its implementation in [`src/lib/localGames.tsx`](src/lib/localGames.tsx).
 5. Verify the runtime feed still parses and refreshes correctly.
 6. Run `npm run test:run`, `npm run build`, and `npm run test:e2e`.
 

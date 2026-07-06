@@ -1,0 +1,24 @@
+<svg width="1200" height="720" viewBox="0 0 1200 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="720" fill="#071012"/>
+  <rect x="122" y="88" width="956" height="544" rx="40" fill="#0E1B1F" stroke="#294A52" stroke-width="8"/>
+  <rect x="172" y="138" width="856" height="444" rx="28" fill="#081315"/>
+  <rect x="202" y="168" width="176" height="176" rx="24" fill="#163239"/>
+  <rect x="404" y="168" width="176" height="176" rx="24" fill="#163239"/>
+  <rect x="606" y="168" width="176" height="176" rx="24" fill="#163239"/>
+  <rect x="808" y="168" width="176" height="176" rx="24" fill="#163239"/>
+  <rect x="202" y="374" width="176" height="176" rx="24" fill="#163239"/>
+  <rect x="404" y="374" width="176" height="176" rx="24" fill="#163239"/>
+  <rect x="606" y="374" width="176" height="176" rx="24" fill="#163239"/>
+  <rect x="808" y="374" width="176" height="176" rx="24" fill="#163239"/>
+  <text x="275" y="278" fill="#A4FFE8" font-family="monospace" font-size="82">▲</text>
+  <text x="478" y="278" fill="#A4FFE8" font-family="monospace" font-size="82">◆</text>
+  <text x="680" y="278" fill="#A4FFE8" font-family="monospace" font-size="82">●</text>
+  <text x="883" y="278" fill="#A4FFE8" font-family="monospace" font-size="82">■</text>
+  <text x="274" y="484" fill="#A4FFE8" font-family="monospace" font-size="82">✦</text>
+  <text x="476" y="484" fill="#A4FFE8" font-family="monospace" font-size="82">✶</text>
+  <text x="679" y="484" fill="#A4FFE8" font-family="monospace" font-size="82">▲</text>
+  <text x="882" y="484" fill="#A4FFE8" font-family="monospace" font-size="82">◆</text>
+  <rect x="172" y="590" width="856" height="18" rx="9" fill="#163239"/>
+  <rect x="172" y="590" width="514" height="18" rx="9" fill="#69FFD3"/>
+  <text x="126" y="655" fill="#F2F6F4" font-family="monospace" font-size="54" letter-spacing="8">MEMORY VAULT 84</text>
+</svg>

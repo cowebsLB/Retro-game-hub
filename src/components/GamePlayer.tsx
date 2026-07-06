@@ -1,6 +1,6 @@
 import { useState } from "react";
+import { getLocalGameComponent } from "../lib/localGames";
 import type { GameEntry } from "../types/game";
-import { LocalGameFrame } from "./LocalGameFrame";
 
 type GamePlayerProps = {
   game: GameEntry;
@@ -10,7 +10,20 @@ export function GamePlayer({ game }: GamePlayerProps) {
   const [embedFailed, setEmbedFailed] = useState(false);
 
   if (game.sourceType === "local") {
-    return <LocalGameFrame />;
+    const LocalGameComponent = getLocalGameComponent(game.playTarget);
+
+    if (!LocalGameComponent) {
+      return (
+        <div className="rounded-[1.75rem] border border-pink-300/20 bg-[#120d29]/95 px-6 py-10 text-center text-slate-300">
+          <p className="pixel-title text-[0.7rem] text-pink-100">Cabinet missing</p>
+          <p className="mt-4 text-sm leading-7">
+            This local cabinet exists in the manifest but does not yet have a matching in-repo implementation.
+          </p>
+        </div>
+      );
+    }
+
+    return <LocalGameComponent />;
   }
 
   return (

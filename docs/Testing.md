@@ -17,15 +17,18 @@
 - Search and tag filtering, including release-note text
 - Slug-based route lookup
 - Route navigation from the catalog to a play page
-- Local game and embed fallback rendering
-- Canvas game HUD presence and upgraded local cabinet UI
+- Local game registry lookup
+- Canvas and puzzle cabinet route rendering
+- Local cabinet HUD and control-surface presence
+- Canvas test shim coverage for richer gradient and stroke effects in local game renderers
+- Direct route coverage for the `Pixel Breach` cabinet
 
 ### End-to-End
 
 - Catalog load
 - Search and filter flow
 - Local game route playback surface
-- Direct external embed route access
+- Direct custom cabinet route access
 - Runtime catalog and update-rail render path
 
 ## Notes

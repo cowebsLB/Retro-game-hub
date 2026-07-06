@@ -15,74 +15,110 @@ type HeroProps = {
 
 export function Hero({ featuredGame, syncMeta }: HeroProps) {
   return (
-    <section className="relative overflow-hidden rounded-[2rem] border border-white/12 bg-[linear-gradient(135deg,rgba(24,18,61,0.95),rgba(14,10,34,0.98))] px-6 py-8 sm:px-10 sm:py-12">
-      <div className="scanline absolute inset-0" aria-hidden="true" />
-      <div className="relative grid items-center gap-10 lg:grid-cols-[1.15fr_0.85fr]">
-        <div>
-          <div className="mb-4 flex flex-wrap items-center gap-3">
-            <p className="text-sm font-medium uppercase tracking-[0.32em] text-cyan-200/80">
-              GitHub Pages arcade
-            </p>
+    <section className="hero-shell px-6 py-10 sm:px-10 sm:py-14" aria-label="Featured game hero">
+      {/* Scanline overlay */}
+      <div className="scanline crt-vignette absolute inset-0" aria-hidden="true" />
+
+      {/* Animated ambient particles */}
+      <div className="particles-overlay" aria-hidden="true">
+        {[...Array(20)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute rounded-full"
+            style={{
+              width: `${1 + Math.random() * 2}px`,
+              height: `${1 + Math.random() * 2}px`,
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              background: i % 3 === 0 ? '#47f5ff' : i % 3 === 1 ? '#ff4fd8' : '#ffd166',
+              opacity: 0.3 + Math.random() * 0.4,
+              boxShadow: `0 0 ${4 + i}px currentColor`,
+              animation: `float-card ${4 + (i % 5)}s ease-in-out infinite`,
+              animationDelay: `${i * 0.3}s`,
+            }}
+          />
+        ))}
+      </div>
+
+      <div className="relative grid items-center gap-10 lg:grid-cols-[1.2fr_0.8fr]">
+        {/* Left column: text */}
+        <div className="space-y-6">
+          <div className="flex flex-wrap items-center gap-3">
+            <span className="section-eyebrow text-cyan-300/80">GitHub Pages Arcade</span>
             <LiveSyncPill {...syncMeta} />
           </div>
-          <h1 className="pixel-title max-w-3xl text-lg text-white sm:text-2xl lg:text-[2rem]">
-            Pick a retro cabinet, track fresh updates, and jump straight into the browser.
+
+          <h1 className="pixel-title max-w-3xl text-base text-white neon-text-cyan sm:text-xl lg:text-2xl">
+            Pick an original retro cabinet, track fresh updates, and jump straight into the browser.
           </h1>
-          <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-200/88">
-            Retro Game Hub now pairs a static shell with a runtime-fed cabinet manifest, so featured titles, patch notes, and metadata can keep moving while the site stays GitHub Pages friendly.
+
+          <p className="max-w-2xl text-base leading-8 text-slate-300">
+            Retro Game Hub pairs a static shell with a runtime-fed cabinet manifest —
+            our in-repo titles, patch notes, and metadata keep moving while the site stays GitHub Pages friendly.
           </p>
-          <div className="mt-8 flex flex-wrap gap-4">
+
+          <div className="flex flex-wrap gap-4">
             <Link
-              className="rounded-full border border-cyan-300 bg-cyan-300 px-6 py-3 font-semibold text-slate-950 transition hover:scale-[1.02] hover:bg-cyan-200"
               to={`/game/${featuredGame.slug}`}
+              className="btn-solid-cyan"
+              id="hero-play-featured"
             >
+              <svg viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4" aria-hidden="true">
+                <path d="M8 5v14l11-7z" />
+              </svg>
               Play featured game
             </Link>
-            <a
-              className="rounded-full border border-white/20 px-6 py-3 font-semibold text-white transition hover:border-pink-300 hover:text-pink-100"
-              href="#catalog"
-            >
+            <a href="#catalog" className="btn-cyan">
               Browse library
             </a>
           </div>
-          <div className="mt-8 flex flex-wrap gap-3 text-sm text-slate-200/75">
-            <span className="rounded-full border border-pink-300/30 bg-pink-300/10 px-3 py-1">
-              Live runtime manifest
-            </span>
-            <span className="rounded-full border border-yellow-300/30 bg-yellow-300/10 px-3 py-1">
-              Local + embedded play
-            </span>
-            <span className="rounded-full border border-green-300/30 bg-green-300/10 px-3 py-1">
-              Showcase cabinet upgraded
-            </span>
+
+          <div className="flex flex-wrap gap-2.5">
+            {[
+              { label: 'Live runtime manifest', color: 'rgba(255,79,216,0.35)', bg: 'rgba(255,79,216,0.08)' },
+              { label: 'Original-only lineup', color: 'rgba(255,209,102,0.35)', bg: 'rgba(255,209,102,0.08)' },
+              { label: 'Custom cabinets live', color: 'rgba(135,245,91,0.35)', bg: 'rgba(135,245,91,0.08)' },
+            ].map(({ label, color, bg }) => (
+              <span
+                key={label}
+                className="rounded-full px-3.5 py-1.5 text-xs font-medium text-slate-200/80"
+                style={{ border: `1px solid ${color}`, background: bg }}
+              >
+                {label}
+              </span>
+            ))}
           </div>
         </div>
-        <div className="float-card marquee-glow glow-frame relative overflow-hidden rounded-[1.75rem] border border-cyan-200/20 bg-[#120d2d] p-5">
-          <div className="mb-4 flex items-center justify-between text-xs uppercase tracking-[0.28em] text-cyan-100/70">
-            <span>Featured cabinet</span>
-            <span>{featuredGame.version}</span>
+
+        {/* Right column: featured game card */}
+        <div className="featured-card p-5">
+          <div className="mb-4 flex items-center justify-between">
+            <span className="section-eyebrow text-cyan-100/60">Featured Cabinet</span>
+            <span className="cabinet-chip">{featuredGame.version}</span>
           </div>
-          <img
-            alt={`${featuredGame.title} preview art`}
-            className="h-56 w-full rounded-[1.25rem] object-cover"
-            src={resolveAssetPath(featuredGame.thumbnail)}
-          />
-          <div className="mt-5">
-            <h2 className="pixel-title text-[0.7rem] text-white sm:text-[0.8rem]">{featuredGame.title}</h2>
-            <p className="mt-3 text-sm leading-7 text-slate-300">{featuredGame.description}</p>
-            <div className="mt-4 flex flex-wrap gap-2">
+          <div className="overflow-hidden rounded-[1.25rem]">
+            <img
+              alt={`${featuredGame.title} preview art`}
+              className="h-48 w-full object-cover transition-transform duration-700 hover:scale-105"
+              src={resolveAssetPath(featuredGame.thumbnail)}
+            />
+          </div>
+          <div className="mt-5 space-y-3">
+            <h2 className="pixel-title text-[0.68rem] text-white sm:text-[0.78rem]">
+              {featuredGame.title}
+            </h2>
+            <p className="text-sm leading-7 text-slate-300">{featuredGame.description}</p>
+            <div className="flex flex-wrap gap-1.5">
               {featuredGame.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="rounded-full border border-white/10 bg-white/6 px-3 py-1 text-xs uppercase tracking-[0.18em] text-slate-200/75"
-                >
-                  {tag}
-                </span>
+                <span key={tag} className="tag-chip">{tag}</span>
               ))}
             </div>
-            <p className="mt-4 text-sm text-cyan-100/80">
-              Updated {new Date(featuredGame.lastUpdated).toLocaleDateString()}
-            </p>
+            <div className="flex items-center justify-between pt-1">
+              <p className="text-xs text-cyan-100/60">
+                Updated {new Date(featuredGame.lastUpdated).toLocaleDateString()}
+              </p>
+              <div className="status-badge status-badge-ready">Ready</div>
+            </div>
           </div>
         </div>
       </div>

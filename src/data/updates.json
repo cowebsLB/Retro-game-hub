@@ -1,26 +1,34 @@
 [
   {
-    "id": "update-neon-120",
-    "gameSlug": "neon-meteor-run",
-    "title": "Neon Meteor Run 1.2.0",
-    "summary": "Canvas gameplay landed with pulse attacks, shield pickups, combo scoring, and persistent best-run tracking.",
-    "timestamp": "2026-07-06T00:00:00.000Z",
-    "type": "game"
+    "id": "update-pixel-breach-100",
+    "gameSlug": "pixel-breach",
+    "title": "Pixel Breach 1.0.0 - New Cabinet",
+    "summary": "Brand new Space Invaders-inspired shooter with 4 unique enemy types, 5 escalating waves, laser combo system, and golden shield pickups.",
+    "timestamp": "2026-07-06T03:55:00.000Z",
+    "type": "release"
   },
   {
-    "id": "update-catalog-live-feed",
+    "id": "update-neon-140",
     "gameSlug": "neon-meteor-run",
-    "title": "Arcade feed runtime sync",
-    "summary": "The hub now refreshes the cabinet manifest and update rail from runtime JSON without waiting for a full app rebuild.",
-    "timestamp": "2026-07-05T23:30:00.000Z",
-    "type": "catalog"
+    "title": "Neon Meteor Run 1.4.0 - Visual Overhaul",
+    "summary": "Particle explosion system, screen shake on collision, animated comet trails, engine glow, and premium CRT HUD elements are all live.",
+    "timestamp": "2026-07-06T03:54:00.000Z",
+    "type": "patch"
   },
   {
-    "id": "update-hextris-fallback",
-    "gameSlug": "hextris-archive-cabinet",
-    "title": "Hextris cabinet fallback",
-    "summary": "Embedded cabinets now surface better open-tab recovery and route-side status details.",
-    "timestamp": "2026-07-05T20:00:00.000Z",
-    "type": "game"
+    "id": "update-skyline-110",
+    "gameSlug": "skyline-sprint-gx",
+    "title": "Skyline Sprint GX 1.1.0 - Visual Pass",
+    "summary": "Rain effect with wet road sheen, animated city antennas with blinking lights, boost jet trails, and particle crash effects added.",
+    "timestamp": "2026-07-06T03:53:00.000Z",
+    "type": "patch"
+  },
+  {
+    "id": "update-memory-110",
+    "gameSlug": "memory-vault-84",
+    "title": "Memory Vault 84 1.1.0 - Enhanced Glyphs",
+    "summary": "Per-glyph color palette with distinct glows, flip animation, circuit-board tile backgrounds, and best-run notification added.",
+    "timestamp": "2026-07-06T03:52:00.000Z",
+    "type": "feature"
   }
 ]

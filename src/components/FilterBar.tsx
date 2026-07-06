@@ -13,34 +13,47 @@ export function FilterBar({
   onQueryChange,
   onTagChange,
 }: FilterBarProps) {
+  const allTags = ["All", ...tags];
+
   return (
-    <div className="glow-frame rounded-[1.5rem] border border-white/10 bg-white/6 p-4 sm:p-5">
-      <div className="grid gap-4 md:grid-cols-[1fr_220px]">
-        <label className="flex flex-col gap-2 text-sm font-medium text-slate-200">
-          Search the library
+    <div className="space-y-4">
+      <label className="block" htmlFor="catalog-search">
+        <span className="sr-only">Search the library</span>
+        <div className="relative">
+          <svg
+            aria-hidden="true"
+            className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            viewBox="0 0 24 24"
+          >
+            <circle cx="11" cy="11" r="8" />
+            <path d="m21 21-4.35-4.35" strokeLinecap="round" />
+          </svg>
           <input
-            className="rounded-2xl border border-white/10 bg-[#110d29] px-4 py-3 text-base text-white outline-none transition placeholder:text-slate-400 focus:border-cyan-300"
+            className="filter-input pl-11 text-sm"
+            id="catalog-search"
             onChange={(event) => onQueryChange(event.target.value)}
-            placeholder="Search by title, era, tag, or player mode"
+            placeholder="Search by title, era, tag, or player mode..."
             type="search"
             value={query}
           />
-        </label>
-        <label className="flex flex-col gap-2 text-sm font-medium text-slate-200">
-          Filter by tag
-          <select
-            className="rounded-2xl border border-white/10 bg-[#110d29] px-4 py-3 text-base text-white outline-none transition focus:border-cyan-300"
-            onChange={(event) => onTagChange(event.target.value)}
-            value={selectedTag}
+        </div>
+      </label>
+
+      <div aria-label="Filter by tag" className="flex flex-wrap gap-2" role="group">
+        {allTags.map((tag) => (
+          <button
+            aria-pressed={selectedTag === tag}
+            className={`filter-tag ${selectedTag === tag ? "filter-tag-active" : ""}`}
+            key={tag}
+            onClick={() => onTagChange(tag)}
+            type="button"
           >
-            <option value="All">All</option>
-            {tags.map((tag) => (
-              <option key={tag} value={tag}>
-                {tag}
-              </option>
-            ))}
-          </select>
-        </label>
+            {tag}
+          </button>
+        ))}
       </div>
     </div>
   );

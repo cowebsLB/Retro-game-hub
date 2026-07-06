@@ -10,4 +10,5 @@ Retro Game Hub does not use a database in v1.
 - Runtime game metadata is mirrored in `public/data/games.json`
 - Runtime update notes are stored in `public/data/updates.json`
 - Static artwork is stored under `public/images`
-- There is no user data, account storage, or backend persistence layer
+- Individual local cabinets use browser `localStorage` for small single-device records such as best score, best distance, or best move count
+- There is no user account storage or backend persistence layer

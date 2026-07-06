@@ -2,7 +2,7 @@
 
 ## Overview
 
-Retro Game Hub is a static retro game library and browser-playable hub hosted through GitHub Pages. The application is built with React, Vite, TypeScript, Tailwind CSS, custom CSS animations, and a runtime-fed JSON update layer for live cabinet metadata.
+Retro Game Hub is a static retro game library and browser-playable hub hosted through GitHub Pages. The application is built with React, Vite, TypeScript, Tailwind CSS, custom CSS animations, and a runtime-fed JSON update layer for live cabinet metadata. The current release ships only original in-repo cabinets.
 
 ## Documentation Map
 

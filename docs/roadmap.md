@@ -3,9 +3,9 @@
 ## Near Term
 
 - Add more original local games
-- Expand the external cabinet catalog
-- Introduce a cleaner local game registry abstraction as the library grows
-- Add more filter dimensions such as status and source type
+- Add audio, sprite art, and stronger visual polish to the current original cabinets
+- Add more filter dimensions such as status, difficulty, and cabinet type
+- Add cabinet-selective save or progression data where it improves replayability
 
 ## Later
 

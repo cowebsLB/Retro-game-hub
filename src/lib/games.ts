@@ -3,7 +3,7 @@ import type { GameEntry, GameUpdate } from "../types/game";
 
 const validSources = new Set(["local", "embed"]);
 const validStatuses = new Set(["ready", "beta"]);
-const validUpdateTypes = new Set(["game", "catalog"]);
+const validUpdateTypes = new Set(["game", "catalog", "release", "patch", "hotfix", "feature"]);
 
 function isStringArray(value: unknown): value is string[] {
   return Array.isArray(value) && value.every((item) => typeof item === "string");

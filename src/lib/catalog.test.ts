@@ -7,8 +7,8 @@ describe("catalog helpers", () => {
   });
 
   it("filters by query and tag", () => {
-    const result = filterGames(catalogGames, "archive", "Embed");
-    expect(result.map((game) => game.slug)).toEqual(["hextris-archive-cabinet", "oregon-trail-archive"]);
+    const result = filterGames(catalogGames, "mirrored glyph", "Local");
+    expect(result.map((game) => game.slug)).toEqual(["memory-vault-84"]);
   });
 
   it("searches release notes and version text", () => {
@@ -17,11 +17,11 @@ describe("catalog helpers", () => {
   });
 
   it("finds a game by slug", () => {
-    expect(getGameBySlug(catalogGames, "oregon-trail-archive")?.title).toBe("Oregon Trail Archive");
+    expect(getGameBySlug(catalogGames, "memory-vault-84")?.title).toBe("Memory Vault 84");
   });
 
   it("builds sorted unique tags", () => {
     expect(getCatalogTags(catalogGames)).toContain("Arcade");
-    expect(getCatalogTags(catalogGames)[0]).toBe("Adventure");
+    expect(getCatalogTags(catalogGames)[0]).toBe("Arcade");
   });
 });

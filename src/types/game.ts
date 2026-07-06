@@ -26,7 +26,7 @@ export type GameUpdate = {
   title: string;
   summary: string;
   timestamp: string;
-  type: "game" | "catalog";
+  type: "game" | "catalog" | "release" | "patch" | "hotfix" | "feature";
 };
 
 export type ArcadeFeedState = {

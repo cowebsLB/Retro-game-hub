@@ -4,6 +4,26 @@ All notable changes to this project will be documented in this file.
 
 The format is based on Keep a Changelog, and this project follows Semantic Versioning.
 
+## [0.4.0] - 2026-07-06
+
+### Added
+
+- Added a reusable local cabinet registry so the hub can ship multiple original in-repo games behind the shared play-page shell.
+- Added `Skyline Sprint GX`, a custom lane-runner cabinet with boost management and persistent best-distance tracking.
+- Added `Memory Vault 84`, a custom puzzle cabinet with a mirrored glyph grid and best-move persistence.
+
+### Changed
+
+- Replaced all third-party archive and embed catalog entries with an original-only lineup.
+- Updated catalog, hero, and play-page copy to position the site as a library of custom cabinets instead of mixed-source embeds.
+- Expanded automated coverage to validate the local game registry and the new cabinet routes.
+- Reworked all shipped cabinets with a stronger visual presentation, including shared cabinet chrome, richer HUD treatments, better canvas effects, and a cleaned-up `Memory Vault 84` glyph set.
+
+### Fixed
+
+- Removed corrupted text encoding from runtime content, card UI, and the new game surfaces so cabinet copy renders correctly.
+- Added direct route coverage for `Pixel Breach` in both the integration and E2E suites.
+
 ## [0.3.0] - 2026-07-06
 
 ### Added
