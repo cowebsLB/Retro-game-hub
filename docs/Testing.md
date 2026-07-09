@@ -23,6 +23,7 @@ The Vitest suite currently verifies:
 - direct route rendering for shipped cabinets including `Pixel Breach`
 - live sync pill freshness updates over time
 - featured hero status rendering from manifest data
+- touch-control dock rendering for `Neon Meteor Run`, `Skyline Sprint GX`, and `Pixel Breach`
 
 ### End-to-End Coverage
 
@@ -42,12 +43,13 @@ Recommended manual checks before shipping:
 - desktop catalog readability
 - mobile cabinet layout
 - keyboard control smoke-check for all local cabinets
+- touch-control smoke-check for all action cabinets on a narrow viewport
 - runtime feed sync label behavior
 - GitHub Pages hash-route correctness
 
 ## Current Verification Baseline
 
-Last full local verification for the current bug-fix pass:
+Last full local verification for the current mobile-controls pass:
 
 - `npm run lint`: pass
 - `npm run test:run`: pass

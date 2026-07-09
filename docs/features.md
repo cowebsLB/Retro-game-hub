@@ -9,6 +9,7 @@
 - Dedicated cabinet routes with metadata, controls, and release notes
 - Original-only local game lineup with shared hub shell and per-cabinet visual identity
 - Responsive desktop and mobile layouts
+- On-screen touch controls for the canvas-based action cabinets
 - Hash routing compatible with GitHub Pages
 
 ## Catalog Features
@@ -28,6 +29,12 @@
 | `Skyline Sprint GX` | Reflex lane runner | lane switching, boost charge, traffic pressure, energy cells | best distance |
 | `Memory Vault 84` | Puzzle cabinet | mirrored glyph pairs, animated flip cards, move-count pressure | best moves |
 | `Pixel Breach` | Shooter cabinet | enemy formations, auto-fire lane control, wave escalation, shield pickups | best score |
+
+## Mobile Interaction
+
+- `Memory Vault 84` remains tap-native because the core game uses button-based card interaction.
+- `Neon Meteor Run`, `Skyline Sprint GX`, and `Pixel Breach` now ship with on-screen touch controls on small screens.
+- Desktop keyboard controls remain available unchanged for all action cabinets.
 
 ## Visual Features
 

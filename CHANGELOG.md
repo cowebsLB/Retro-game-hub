@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 
 The format is based on Keep a Changelog, and this project follows Semantic Versioning.
 
+## [0.4.3] - 2026-07-09
+
+### Added
+
+- Added a shared mobile touch-control dock for local action cabinets.
+- Added regression coverage that verifies the touch-control surfaces render on the shipped action game routes.
+
+### Changed
+
+- Updated `Neon Meteor Run`, `Skyline Sprint GX`, and `Pixel Breach` to expose on-screen touch controls for mobile play.
+- Updated release documentation to describe the new mobile interaction model and verification coverage.
+
 ## [0.4.2] - 2026-07-09
 
 ### Added

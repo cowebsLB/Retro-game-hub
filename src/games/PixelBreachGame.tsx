@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import { MobileActionCluster, MobileControlDock } from "../components/MobileControlDock";
 
 type Bullet = { id: number; x: number; y: number; vy: number };
 type Enemy = { id: number; x: number; y: number; row: number; col: number; alive: boolean; hitFlash: number };
@@ -139,6 +140,15 @@ export function PixelBreachGame() {
   const keys = useRef(new Set<string>());
   const nextId = useRef(1000);
   const [hud, setHud] = useState(() => init());
+
+  const setVirtualKey = (key: string, active: boolean) => {
+    if (active) {
+      keys.current.add(key);
+      return;
+    }
+
+    keys.current.delete(key);
+  };
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
@@ -793,6 +803,33 @@ export function PixelBreachGame() {
               width={W}
             />
           </div>
+          <MobileControlDock title="Pixel Breach touch controls">
+            <MobileActionCluster
+              actions={[
+                {
+                  label: "Strafe left",
+                  onPress: () => setVirtualKey("arrowleft", true),
+                  onPressEnd: () => setVirtualKey("arrowleft", false),
+                },
+                {
+                  label: "Strafe right",
+                  onPress: () => setVirtualKey("arrowright", true),
+                  onPressEnd: () => setVirtualKey("arrowright", false),
+                },
+                {
+                  label: "Hold fire",
+                  onPress: () => setVirtualKey(" ", true),
+                  onPressEnd: () => setVirtualKey(" ", false),
+                  tone: "pink",
+                },
+                {
+                  label: "Restart",
+                  onPress: restart,
+                  tone: "gold",
+                },
+              ]}
+            />
+          </MobileControlDock>
           <div className="cabinet-note">
             <p className={`text-sm font-semibold ${statusTone}`}>{hud.message}</p>
           </div>

@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import { MobileActionCluster, MobileControlDock, MobileDirectionPad } from "../components/MobileControlDock";
 
 /* ──────────────────────────────────────────
    Types
@@ -139,6 +140,15 @@ export function NeonMeteorRunGame() {
   const pressedKeys = useRef(new Set<string>());
   const nextId = useRef(400);
   const [hud, setHud] = useState(() => createInitialState());
+
+  const setVirtualKey = (key: string, active: boolean) => {
+    if (active) {
+      pressedKeys.current.add(key);
+      return;
+    }
+
+    pressedKeys.current.delete(key);
+  };
 
   /* Key handlers */
   useEffect(() => {
@@ -766,6 +776,34 @@ export function NeonMeteorRunGame() {
               width={W}
             />
           </div>
+
+          <MobileControlDock title="Neon Meteor touch controls">
+            <MobileDirectionPad
+              onUpPress={() => setVirtualKey("arrowup", true)}
+              onUpRelease={() => setVirtualKey("arrowup", false)}
+              onDownPress={() => setVirtualKey("arrowdown", true)}
+              onDownRelease={() => setVirtualKey("arrowdown", false)}
+              onLeftPress={() => setVirtualKey("arrowleft", true)}
+              onLeftRelease={() => setVirtualKey("arrowleft", false)}
+              onRightPress={() => setVirtualKey("arrowright", true)}
+              onRightRelease={() => setVirtualKey("arrowright", false)}
+            />
+            <MobileActionCluster
+              actions={[
+                {
+                  label: "Pulse burst",
+                  onPress: () => setVirtualKey(" ", true),
+                  onPressEnd: () => setVirtualKey(" ", false),
+                  tone: "pink",
+                },
+                {
+                  label: "Restart",
+                  onPress: restart,
+                  tone: "gold",
+                },
+              ]}
+            />
+          </MobileControlDock>
 
           <div className="cabinet-note">
             <p className={`text-sm font-semibold ${statusTone}`}>{hud.message}</p>

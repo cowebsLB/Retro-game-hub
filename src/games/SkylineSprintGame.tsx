@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import { MobileActionCluster, MobileControlDock } from "../components/MobileControlDock";
 
 type Hazard = { id: number; lane: number; y: number; speed: number; height: number; color: string };
 type Pickup = { id: number; lane: number; y: number; value: number; angle: number };
@@ -76,6 +77,30 @@ export function SkylineSprintGame() {
   const inputRef = useRef({ left: false, right: false, boost: false, leftEdge: false, rightEdge: false });
   const nextId = useRef(300);
   const [hud, setHud] = useState(() => createInitialState());
+
+  const queueLaneShift = (direction: "left" | "right") => {
+    if (direction === "left" && !inputRef.current.leftEdge) {
+      inputRef.current.left = true;
+      inputRef.current.leftEdge = true;
+      return;
+    }
+
+    if (direction === "right" && !inputRef.current.rightEdge) {
+      inputRef.current.right = true;
+      inputRef.current.rightEdge = true;
+    }
+  };
+
+  const releaseLaneShift = (direction: "left" | "right") => {
+    if (direction === "left") {
+      inputRef.current.left = false;
+      inputRef.current.leftEdge = false;
+      return;
+    }
+
+    inputRef.current.right = false;
+    inputRef.current.rightEdge = false;
+  };
 
   useEffect(() => {
     const onDown = (e: KeyboardEvent) => {
@@ -600,6 +625,33 @@ export function SkylineSprintGame() {
             </div>
             <canvas aria-label="Skyline Sprint GX playfield" className="mx-auto block w-full max-w-[700px]" height={H} ref={canvasRef} width={W} />
           </div>
+          <MobileControlDock title="Skyline Sprint touch controls">
+            <MobileActionCluster
+              actions={[
+                {
+                  label: "Shift left",
+                  onPress: () => queueLaneShift("left"),
+                  onPressEnd: () => releaseLaneShift("left"),
+                },
+                {
+                  label: "Shift right",
+                  onPress: () => queueLaneShift("right"),
+                  onPressEnd: () => releaseLaneShift("right"),
+                },
+                {
+                  label: "Hold boost",
+                  onPress: () => { inputRef.current.boost = true; },
+                  onPressEnd: () => { inputRef.current.boost = false; },
+                  tone: "pink",
+                },
+                {
+                  label: "Restart",
+                  onPress: restart,
+                  tone: "gold",
+                },
+              ]}
+            />
+          </MobileControlDock>
           <div className="cabinet-note"><p className={`text-sm font-semibold ${statusTone}`}>{hud.message}</p></div>
         </div>
         <aside className="space-y-3 rounded-[1.5rem] border border-white/8 bg-black/20 p-4 text-sm text-slate-300">
