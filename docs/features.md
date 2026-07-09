@@ -9,7 +9,7 @@
 - Dedicated cabinet routes with metadata, controls, and release notes
 - Original-only local game lineup with shared hub shell and per-cabinet visual identity
 - Responsive desktop and mobile layouts
-- On-screen touch controls for the canvas-based action cabinets
+- Gesture-first touch controls for the canvas-based action cabinets
 - Hash routing compatible with GitHub Pages
 
 ## Catalog Features
@@ -33,7 +33,9 @@
 ## Mobile Interaction
 
 - `Memory Vault 84` remains tap-native because the core game uses button-based card interaction.
-- `Neon Meteor Run`, `Skyline Sprint GX`, and `Pixel Breach` now ship with on-screen touch controls on small screens.
+- `Neon Meteor Run` supports direct press-and-drag ship steering plus a Pulse action.
+- `Skyline Sprint GX` supports horizontal swipes or lane taps plus a held Boost action.
+- `Pixel Breach` supports horizontal press-and-drag movement with auto-fire while pressed.
 - Desktop keyboard controls remain available unchanged for all action cabinets.
 
 ## Visual Features

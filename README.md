@@ -1,6 +1,6 @@
 # Retro Game Hub
 
-[![Version](https://img.shields.io/badge/version-0.4.3-47f5ff?style=for-the-badge)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-0.4.4-47f5ff?style=for-the-badge)](CHANGELOG.md)
 [![Node](https://img.shields.io/badge/node-24%2B-87f55b?style=for-the-badge)](docs/installation.md)
 [![React](https://img.shields.io/badge/react-19-61dafb?style=for-the-badge)](package.json)
 [![Vite](https://img.shields.io/badge/vite-8-ffd166?style=for-the-badge)](package.json)
@@ -15,7 +15,7 @@ Retro Game Hub is a static arcade library built for GitHub Pages. The app lets p
 - Tailwind CSS plus custom CRT, glow, and cabinet animation styling
 - Runtime-fed catalog and update rail backed by static JSON
 - Minute-level live sync freshness label and manifest-driven status badges
-- Touch controls for the three canvas-based action cabinets on small screens
+- Gesture-first touch controls for the three canvas-based action cabinets on small screens
 - Dedicated play pages with release notes, controls, and metadata
 - Unit, integration, and end-to-end coverage
 - GitHub Pages deployment workflow for static publishing
@@ -219,7 +219,7 @@ See [docs/Deployment.md](docs/Deployment.md) for the full publish checklist and 
 
 ## Release Snapshot
 
-- App version: `0.4.3`
+- App version: `0.4.4`
 - Catalog size: `4` original cabinets
 - Hosting target: GitHub Pages
 - Runtime model: static app plus runtime-polled JSON feeds

@@ -1,5 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
-import { MobileActionCluster, MobileControlDock } from "../components/MobileControlDock";
+import { useEffect, useMemo, useRef, useState, type PointerEvent as ReactPointerEvent } from "react";
 
 type Bullet = { id: number; x: number; y: number; vy: number };
 type Enemy = { id: number; x: number; y: number; row: number; col: number; alive: boolean; hitFlash: number };
@@ -138,6 +137,7 @@ export function PixelBreachGame() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const stateRef = useRef<BreachState | null>(null);
   const keys = useRef(new Set<string>());
+  const interceptPointerId = useRef<number | null>(null);
   const nextId = useRef(1000);
   const [hud, setHud] = useState(() => init());
 
@@ -148,6 +148,41 @@ export function PixelBreachGame() {
     }
 
     keys.current.delete(key);
+  };
+
+  const moveFighterFromPointer = (event: ReactPointerEvent<HTMLCanvasElement>) => {
+    const state = stateRef.current;
+    if (!state || state.gameOver || state.victory) return;
+
+    const bounds = event.currentTarget.getBoundingClientRect();
+    state.playerX = Math.max(
+      30,
+      Math.min(W - 30, ((event.clientX - bounds.left) / bounds.width) * W),
+    );
+  };
+
+  const startTouchIntercept = (event: ReactPointerEvent<HTMLCanvasElement>) => {
+    event.preventDefault();
+    interceptPointerId.current = event.pointerId;
+    try {
+      event.currentTarget.setPointerCapture(event.pointerId);
+    } catch {
+      // Pointer capture is optional; the tracked pointer still works while it remains over the canvas.
+    }
+    moveFighterFromPointer(event);
+    setVirtualKey(" ", true);
+  };
+
+  const continueTouchIntercept = (event: ReactPointerEvent<HTMLCanvasElement>) => {
+    if (interceptPointerId.current !== event.pointerId) return;
+    event.preventDefault();
+    moveFighterFromPointer(event);
+  };
+
+  const stopTouchIntercept = (event: ReactPointerEvent<HTMLCanvasElement>) => {
+    if (interceptPointerId.current !== event.pointerId) return;
+    interceptPointerId.current = null;
+    setVirtualKey(" ", false);
   };
 
   useEffect(() => {
@@ -797,39 +832,20 @@ export function PixelBreachGame() {
             </div>
             <canvas
               aria-label="Pixel Breach game arena"
-              className="mx-auto block w-full max-w-[700px]"
+              aria-description="Press and drag horizontally to move and auto-fire."
+              className="mx-auto block w-full max-w-[700px] touch-none"
               height={H}
+              onPointerCancel={stopTouchIntercept}
+              onPointerDown={startTouchIntercept}
+              onPointerMove={continueTouchIntercept}
+              onPointerUp={stopTouchIntercept}
               ref={canvasRef}
               width={W}
             />
           </div>
-          <MobileControlDock title="Pixel Breach touch controls">
-            <MobileActionCluster
-              actions={[
-                {
-                  label: "Strafe left",
-                  onPress: () => setVirtualKey("arrowleft", true),
-                  onPressEnd: () => setVirtualKey("arrowleft", false),
-                },
-                {
-                  label: "Strafe right",
-                  onPress: () => setVirtualKey("arrowright", true),
-                  onPressEnd: () => setVirtualKey("arrowright", false),
-                },
-                {
-                  label: "Hold fire",
-                  onPress: () => setVirtualKey(" ", true),
-                  onPressEnd: () => setVirtualKey(" ", false),
-                  tone: "pink",
-                },
-                {
-                  label: "Restart",
-                  onPress: restart,
-                  tone: "gold",
-                },
-              ]}
-            />
-          </MobileControlDock>
+          <p className="rounded-2xl border border-cyan-300/20 bg-cyan-300/6 px-4 py-3 text-center text-xs font-semibold uppercase tracking-[0.14em] text-cyan-100 sm:hidden">
+            Press and drag to move + auto-fire
+          </p>
           <div className="cabinet-note">
             <p className={`text-sm font-semibold ${statusTone}`}>{hud.message}</p>
           </div>

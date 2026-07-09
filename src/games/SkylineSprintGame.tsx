@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, type PointerEvent as ReactPointerEvent } from "react";
 import { MobileActionCluster, MobileControlDock } from "../components/MobileControlDock";
 
 type Hazard = { id: number; lane: number; y: number; speed: number; height: number; color: string };
@@ -75,31 +75,51 @@ export function SkylineSprintGame() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const stateRef = useRef<SprintState | null>(null);
   const inputRef = useRef({ left: false, right: false, boost: false, leftEdge: false, rightEdge: false });
+  const gestureRef = useRef<{ pointerId: number; startX: number } | null>(null);
   const nextId = useRef(300);
   const [hud, setHud] = useState(() => createInitialState());
 
-  const queueLaneShift = (direction: "left" | "right") => {
-    if (direction === "left" && !inputRef.current.leftEdge) {
-      inputRef.current.left = true;
-      inputRef.current.leftEdge = true;
-      return;
-    }
-
-    if (direction === "right" && !inputRef.current.rightEdge) {
-      inputRef.current.right = true;
-      inputRef.current.rightEdge = true;
+  const startLaneGesture = (event: ReactPointerEvent<HTMLCanvasElement>) => {
+    event.preventDefault();
+    gestureRef.current = { pointerId: event.pointerId, startX: event.clientX };
+    try {
+      event.currentTarget.setPointerCapture(event.pointerId);
+    } catch {
+      // Pointer capture is optional; taps and completed in-bounds swipes still work without it.
     }
   };
 
-  const releaseLaneShift = (direction: "left" | "right") => {
-    if (direction === "left") {
-      inputRef.current.left = false;
-      inputRef.current.leftEdge = false;
-      return;
+  const finishLaneGesture = (event: ReactPointerEvent<HTMLCanvasElement>) => {
+    const gesture = gestureRef.current;
+    if (!gesture || gesture.pointerId !== event.pointerId) return;
+
+    event.preventDefault();
+    const deltaX = event.clientX - gesture.startX;
+    if (Math.abs(deltaX) >= 36) {
+      const state = stateRef.current;
+      if (state && !state.gameOver && !state.victory) {
+        const direction = deltaX < 0 ? -1 : 1;
+        state.targetLane = Math.min(LANES.length - 1, Math.max(0, state.targetLane + direction));
+        state.laneBlend = 0;
+      }
+    } else {
+      const state = stateRef.current;
+      const bounds = event.currentTarget.getBoundingClientRect();
+      const tappedLane = Math.min(
+        LANES.length - 1,
+        Math.max(0, Math.floor(((event.clientX - bounds.left) / bounds.width) * LANES.length)),
+      );
+      if (state && !state.gameOver && !state.victory && tappedLane !== state.targetLane) {
+        state.targetLane = tappedLane;
+        state.laneBlend = 0;
+      }
     }
 
-    inputRef.current.right = false;
-    inputRef.current.rightEdge = false;
+    gestureRef.current = null;
+  };
+
+  const cancelLaneGesture = () => {
+    gestureRef.current = null;
   };
 
   useEffect(() => {
@@ -384,7 +404,7 @@ export function SkylineSprintGame() {
       s.hazards.forEach(h => {
         const hx = LANES[h.lane];
         const yPct = (h.y - 60) / (H - 60);
-        const scale = 0.45 + yPct * 0.55; 
+        const scale = Math.max(0.18, 0.45 + yPct * 0.55);
         const carW = 82 * scale;
         const carH = h.height * scale;
 
@@ -459,7 +479,7 @@ export function SkylineSprintGame() {
       // 8. Pickups
       s.pickups.forEach(p => {
         const pyPct = (p.y - 60) / (H - 60);
-        const scale = 0.5 + pyPct * 0.5;
+        const scale = Math.max(0.18, 0.5 + pyPct * 0.5);
         const px = LANES[p.lane];
         ctx.save();
         ctx.translate(px, p.y + 18);
@@ -623,31 +643,26 @@ export function SkylineSprintGame() {
               <span>Night Expressway Feed</span>
               <span className={hud.boostTime > 0.1 ? "text-cyan-300" : "text-slate-400"}>{hud.boostTime > 0.1 ? "🚀 Boost Live" : "Cruise Mode"}</span>
             </div>
-            <canvas aria-label="Skyline Sprint GX playfield" className="mx-auto block w-full max-w-[700px]" height={H} ref={canvasRef} width={W} />
+            <canvas
+              aria-description="Swipe left or right, or tap a road lane, to steer."
+              aria-label="Skyline Sprint GX playfield"
+              className="mx-auto block w-full max-w-[700px] touch-none"
+              height={H}
+              onPointerCancel={cancelLaneGesture}
+              onPointerDown={startLaneGesture}
+              onPointerUp={finishLaneGesture}
+              ref={canvasRef}
+              width={W}
+            />
           </div>
-          <MobileControlDock title="Skyline Sprint touch controls">
+          <MobileControlDock instruction="Swipe or tap lanes in the playfield" title="Touch steering">
             <MobileActionCluster
               actions={[
-                {
-                  label: "Shift left",
-                  onPress: () => queueLaneShift("left"),
-                  onPressEnd: () => releaseLaneShift("left"),
-                },
-                {
-                  label: "Shift right",
-                  onPress: () => queueLaneShift("right"),
-                  onPressEnd: () => releaseLaneShift("right"),
-                },
                 {
                   label: "Hold boost",
                   onPress: () => { inputRef.current.boost = true; },
                   onPressEnd: () => { inputRef.current.boost = false; },
                   tone: "pink",
-                },
-                {
-                  label: "Restart",
-                  onPress: restart,
-                  tone: "gold",
                 },
               ]}
             />

@@ -1,5 +1,5 @@
-import { useEffect, useMemo, useRef, useState } from "react";
-import { MobileActionCluster, MobileControlDock, MobileDirectionPad } from "../components/MobileControlDock";
+import { useEffect, useMemo, useRef, useState, type PointerEvent as ReactPointerEvent } from "react";
+import { MobileActionCluster, MobileControlDock } from "../components/MobileControlDock";
 
 /* ──────────────────────────────────────────
    Types
@@ -138,6 +138,7 @@ export function NeonMeteorRunGame() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const stateRef = useRef<WaveState | null>(null);
   const pressedKeys = useRef(new Set<string>());
+  const steeringPointerId = useRef<number | null>(null);
   const nextId = useRef(400);
   const [hud, setHud] = useState(() => createInitialState());
 
@@ -148,6 +149,40 @@ export function NeonMeteorRunGame() {
     }
 
     pressedKeys.current.delete(key);
+  };
+
+  const steerFromPointer = (event: ReactPointerEvent<HTMLCanvasElement>) => {
+    const state = stateRef.current;
+    if (!state || state.gameOver || state.victory) return;
+
+    const bounds = event.currentTarget.getBoundingClientRect();
+    const nextX = clamp(((event.clientX - bounds.left) / bounds.width) * W, 24, W - 24);
+    const nextY = clamp(((event.clientY - bounds.top) / bounds.height) * H, 70, H - 30);
+    state.player.vx = clamp((nextX - state.player.x) * 8, -260, 260);
+    state.player.vy = clamp((nextY - state.player.y) * 8, -260, 260);
+    state.player.x = nextX;
+    state.player.y = nextY;
+  };
+
+  const startSteering = (event: ReactPointerEvent<HTMLCanvasElement>) => {
+    event.preventDefault();
+    steeringPointerId.current = event.pointerId;
+    try {
+      event.currentTarget.setPointerCapture(event.pointerId);
+    } catch {
+      // Pointer capture is optional; the tracked pointer still works while it remains over the canvas.
+    }
+    steerFromPointer(event);
+  };
+
+  const continueSteering = (event: ReactPointerEvent<HTMLCanvasElement>) => {
+    if (steeringPointerId.current !== event.pointerId) return;
+    event.preventDefault();
+    steerFromPointer(event);
+  };
+
+  const stopSteering = (event: ReactPointerEvent<HTMLCanvasElement>) => {
+    if (steeringPointerId.current === event.pointerId) steeringPointerId.current = null;
   };
 
   /* Key handlers */
@@ -770,24 +805,19 @@ export function NeonMeteorRunGame() {
             </div>
             <canvas
               aria-label="Neon Meteor Run local game arena"
-              className="mx-auto block w-full max-w-[700px]"
+              aria-description="Press and drag anywhere in the arena to steer."
+              className="mx-auto block w-full max-w-[700px] touch-none"
               height={H}
+              onPointerCancel={stopSteering}
+              onPointerDown={startSteering}
+              onPointerMove={continueSteering}
+              onPointerUp={stopSteering}
               ref={canvasRef}
               width={W}
             />
           </div>
 
-          <MobileControlDock title="Neon Meteor touch controls">
-            <MobileDirectionPad
-              onUpPress={() => setVirtualKey("arrowup", true)}
-              onUpRelease={() => setVirtualKey("arrowup", false)}
-              onDownPress={() => setVirtualKey("arrowdown", true)}
-              onDownRelease={() => setVirtualKey("arrowdown", false)}
-              onLeftPress={() => setVirtualKey("arrowleft", true)}
-              onLeftRelease={() => setVirtualKey("arrowleft", false)}
-              onRightPress={() => setVirtualKey("arrowright", true)}
-              onRightRelease={() => setVirtualKey("arrowright", false)}
-            />
+          <MobileControlDock instruction="Drag the ship in the playfield" title="Touch steering">
             <MobileActionCluster
               actions={[
                 {
@@ -795,11 +825,6 @@ export function NeonMeteorRunGame() {
                   onPress: () => setVirtualKey(" ", true),
                   onPressEnd: () => setVirtualKey(" ", false),
                   tone: "pink",
-                },
-                {
-                  label: "Restart",
-                  onPress: restart,
-                  tone: "gold",
                 },
               ]}
             />

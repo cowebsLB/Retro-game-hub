@@ -4,6 +4,22 @@ All notable changes to this project will be documented in this file.
 
 The format is based on Keep a Changelog, and this project follows Semantic Versioning.
 
+## [0.4.4] - 2026-07-09
+
+### Added
+
+- Added mobile E2E coverage for drag, swipe, narrow-viewport overflow, and screenshot-backed cabinet checks.
+
+### Changed
+
+- Replaced mobile direction buttons with direct playfield gestures: drag steering in `Neon Meteor Run`, swipe or lane taps in `Skyline Sprint GX`, and drag-to-move auto-fire in `Pixel Breach`.
+- Reduced mobile action docks to game-specific actions such as Pulse and Boost.
+
+### Fixed
+
+- Fixed negative offscreen vehicle and pickup scales that could crash the `Skyline Sprint GX` canvas renderer.
+- Added pointer-capture fallbacks so in-bounds gestures still work when capture is unavailable.
+
 ## [0.4.3] - 2026-07-09
 
 ### Added

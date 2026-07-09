@@ -28,6 +28,8 @@ describe("Retro Game Hub app", () => {
     expect(screen.getByLabelText(/skyline sprint gx playfield/i)).toBeInTheDocument();
     expect(screen.getByText(/boost reserve/i)).toBeInTheDocument();
     expect(screen.getByRole("button", { name: /hold boost/i })).toBeInTheDocument();
+    expect(screen.getByText(/swipe or tap lanes/i)).toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: /shift left/i })).not.toBeInTheDocument();
   });
 
   it("renders the memory vault custom cabinet", async () => {
@@ -46,7 +48,8 @@ describe("Retro Game Hub app", () => {
     expect(await screen.findByRole("heading", { name: /pixel breach/i })).toBeInTheDocument();
     expect(screen.getByLabelText(/pixel breach game arena/i)).toBeInTheDocument();
     expect(screen.getByText(/combat systems/i)).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: /hold fire/i })).toBeInTheDocument();
+    expect(screen.getByText(/press and drag to move \+ auto-fire/i)).toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: /strafe left/i })).not.toBeInTheDocument();
   });
 
   it("renders the neon meteor mobile control dock", async () => {
@@ -54,6 +57,7 @@ describe("Retro Game Hub app", () => {
     render(<App />);
     expect(await screen.findByRole("heading", { name: /neon meteor run/i })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: /pulse burst/i })).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: /move up/i })).toBeInTheDocument();
+    expect(screen.getByText(/drag the ship in the playfield/i)).toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: /move up/i })).not.toBeInTheDocument();
   });
 });

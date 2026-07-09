@@ -41,48 +41,13 @@ function MobileControlButton({
   );
 }
 
-type DirectionPadProps = {
-  onUpPress?: () => void;
-  onUpRelease?: () => void;
-  onDownPress?: () => void;
-  onDownRelease?: () => void;
-  onLeftPress?: () => void;
-  onLeftRelease?: () => void;
-  onRightPress?: () => void;
-  onRightRelease?: () => void;
-};
-
-export function MobileDirectionPad({
-  onUpPress,
-  onUpRelease,
-  onDownPress,
-  onDownRelease,
-  onLeftPress,
-  onLeftRelease,
-  onRightPress,
-  onRightRelease,
-}: DirectionPadProps) {
-  return (
-    <div className="grid grid-cols-3 gap-2">
-      <div />
-      <MobileControlButton label="Move up" onPress={onUpPress} onPressEnd={onUpRelease} />
-      <div />
-      <MobileControlButton label="Move left" onPress={onLeftPress} onPressEnd={onLeftRelease} />
-      <div />
-      <MobileControlButton label="Move right" onPress={onRightPress} onPressEnd={onRightRelease} />
-      <div />
-      <MobileControlButton label="Move down" onPress={onDownPress} onPressEnd={onDownRelease} />
-      <div />
-    </div>
-  );
-}
-
 type MobileControlDockProps = {
   title: string;
+  instruction: string;
   children: ReactNode;
 };
 
-export function MobileControlDock({ title, children }: MobileControlDockProps) {
+export function MobileControlDock({ title, instruction, children }: MobileControlDockProps) {
   return (
     <section
       aria-label={title}
@@ -92,7 +57,7 @@ export function MobileControlDock({ title, children }: MobileControlDockProps) {
         <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-300">
           {title}
         </p>
-        <p className="text-[0.68rem] text-slate-500">Touch and hold</p>
+        <p className="text-right text-[0.68rem] text-slate-500">{instruction}</p>
       </div>
       <div className="space-y-3">{children}</div>
     </section>
@@ -110,7 +75,7 @@ type ActionClusterProps = {
 
 export function MobileActionCluster({ actions }: ActionClusterProps) {
   return (
-    <div className="grid grid-cols-2 gap-2">
+    <div className={`grid gap-2 ${actions.length === 1 ? "grid-cols-1" : "grid-cols-2"}`}>
       {actions.map((action) => (
         <MobileControlButton
           key={action.label}

@@ -30,7 +30,7 @@ Hash routes are intentional because GitHub Pages does not provide server-side re
 5. `src/routes/GamePage.tsx` resolves the active cabinet by slug and renders metadata plus the play surface.
 6. `src/components/GamePlayer.tsx` decides how to render the playable surface for the selected entry.
 7. `src/lib/localGames.tsx` maps `playTarget` ids to local cabinet implementations.
-8. `src/components/MobileControlDock.tsx` provides shared touch-control primitives for the action cabinets on small screens.
+8. `src/components/MobileControlDock.tsx` provides compact action controls while each canvas owns its game-specific pointer gesture mapping.
 
 ## Content Architecture
 
@@ -67,7 +67,7 @@ Each local cabinet is responsible for:
 
 - rendering its own play surface
 - exposing its own HUD and control messaging
-- wiring mobile touch controls into its existing input state when keyboard interaction is not available
+- mapping mobile pointer gestures into the same simulation state used by keyboard controls
 - handling browser-local persistence where needed
 
 ## Persistence Model

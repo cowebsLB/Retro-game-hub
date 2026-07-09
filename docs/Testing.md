@@ -23,7 +23,7 @@ The Vitest suite currently verifies:
 - direct route rendering for shipped cabinets including `Pixel Breach`
 - live sync pill freshness updates over time
 - featured hero status rendering from manifest data
-- touch-control dock rendering for `Neon Meteor Run`, `Skyline Sprint GX`, and `Pixel Breach`
+- gesture hints and removal of obsolete direction buttons for `Neon Meteor Run`, `Skyline Sprint GX`, and `Pixel Breach`
 
 ### End-to-End Coverage
 
@@ -34,6 +34,9 @@ The Playwright suite currently verifies:
 - route navigation into a cabinet
 - direct cabinet route access
 - visible local play surface rendering
+- mobile drag and swipe input across all three action cabinets
+- 390px viewport overflow protection
+- screenshot capture for representative mobile gameplay states
 
 ### Manual Verification
 
@@ -49,7 +52,7 @@ Recommended manual checks before shipping:
 
 ## Current Verification Baseline
 
-Last full local verification for the current mobile-controls pass:
+Last full local verification for the gesture-controls pass:
 
 - `npm run lint`: pass
 - `npm run test:run`: pass
