@@ -21,6 +21,8 @@ The Vitest suite currently verifies:
 - local cabinet registry lookup
 - catalog rendering and card-to-route navigation
 - direct route rendering for shipped cabinets including `Pixel Breach`
+- live sync pill freshness updates over time
+- featured hero status rendering from manifest data
 
 ### End-to-End Coverage
 
@@ -45,7 +47,7 @@ Recommended manual checks before shipping:
 
 ## Current Verification Baseline
 
-Last full local verification for the current docs-refresh pass:
+Last full local verification for the current bug-fix pass:
 
 - `npm run lint`: pass
 - `npm run test:run`: pass

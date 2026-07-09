@@ -1,4 +1,4 @@
-import { startTransition, useDeferredValue, useMemo, useState } from "react";
+import { startTransition, useDeferredValue, useEffect, useMemo, useState } from "react";
 import { FilterBar } from "../components/FilterBar";
 import { GameCard } from "../components/GameCard";
 import { Hero } from "../components/Hero";
@@ -10,17 +10,36 @@ type HomePageProps = {
   feed: ArcadeFeedState;
 };
 
+function getLastSyncLabel(lastSyncAt: number | null, now: number): string {
+  if (!lastSyncAt) {
+    return "bundled";
+  }
+
+  return `${Math.max(1, Math.floor((now - lastSyncAt) / 60000))}m ago`;
+}
+
 export function HomePage({ feed }: HomePageProps) {
   const [query, setQuery] = useState("");
   const [selectedTag, setSelectedTag] = useState("All");
+  const [now, setNow] = useState(() => Date.now());
   const deferredQuery = useDeferredValue(query);
   const featuredGame = getFeaturedGame(feed.games);
   const tags = getCatalogTags(feed.games);
   const filteredGames = filterGames(feed.games, deferredQuery, selectedTag);
-  const lastSyncLabel = useMemo(() => {
-    if (!feed.lastSyncAt) return "bundled";
-    return `${Math.max(1, Math.floor((Date.now() - feed.lastSyncAt) / 60000))}m ago`;
+
+  useEffect(() => {
+    setNow(Date.now());
+
+    const intervalId = window.setInterval(() => {
+      setNow(Date.now());
+    }, 60000);
+
+    return () => window.clearInterval(intervalId);
   }, [feed.lastSyncAt]);
+
+  const lastSyncLabel = useMemo(() => {
+    return getLastSyncLabel(feed.lastSyncAt, now);
+  }, [feed.lastSyncAt, now]);
 
   if (!featuredGame) return null;
 

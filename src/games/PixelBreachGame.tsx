@@ -29,6 +29,7 @@ type BreachState = {
   totalTime: number;
   enemyFireTimer: number;
   shakeTime: number;
+  waveIntroTime: number;
 };
 
 const W = 700;
@@ -128,6 +129,7 @@ function init(): BreachState {
     totalTime: 0,
     enemyFireTimer: rand(1.5, 3),
     shakeTime: 0,
+    waveIntroTime: 0,
   };
 }
 
@@ -189,6 +191,7 @@ export function PixelBreachGame() {
       state.shakeTime = Math.max(0, state.shakeTime - deltaSeconds);
       state.playerHitFlash = Math.max(0, state.playerHitFlash - deltaSeconds);
       state.comboTimer = Math.max(0, state.comboTimer - deltaSeconds);
+      state.waveIntroTime = Math.max(0, state.waveIntroTime - deltaSeconds);
       if (state.comboTimer === 0) {
         state.combo = 0;
       }
@@ -338,6 +341,7 @@ export function PixelBreachGame() {
         } else {
           state.enemies = makeGrid();
           state.enemyDir = 1;
+          state.waveIntroTime = 2.5;
           state.message = `Wave ${state.wave} inbound - hold the line!`;
           state.shields.push({
             id: nextId.current++,
@@ -673,8 +677,8 @@ export function PixelBreachGame() {
         context.fillText(`x${state.combo} CHAIN`, 30, H - 46);
       }
 
-      if (state.totalTime < 2.5 && state.wave > 1) {
-        context.fillStyle = `rgba(71,245,255,${Math.max(0, 1 - state.totalTime / 2.5) * 0.9})`;
+      if (state.waveIntroTime > 0 && state.wave > 1) {
+        context.fillStyle = `rgba(71,245,255,${Math.max(0, state.waveIntroTime / 2.5) * 0.9})`;
         context.font = "bold 22px 'Chakra Petch', sans-serif";
         context.textAlign = "center";
         context.fillText(`WAVE ${state.wave}`, W / 2, H / 2);

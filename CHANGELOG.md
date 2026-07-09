@@ -4,6 +4,23 @@ All notable changes to this project will be documented in this file.
 
 The format is based on Keep a Changelog, and this project follows Semantic Versioning.
 
+## [0.4.2] - 2026-07-09
+
+### Added
+
+- Added regression coverage for the live sync pill refresh behavior and featured cabinet status rendering.
+
+### Changed
+
+- Updated the home page sync pill to refresh its relative time label between feed polls.
+- Updated the featured hero card to render the cabinet status directly from manifest data.
+
+### Fixed
+
+- Fixed frame-rate-dependent meteor movement in `Neon Meteor Run` so gameplay speed stays time-based.
+- Fixed `Pixel Breach` wave intro messaging so later waves show their intro banner again.
+- Fixed remaining corrupted sync pill text on the home page.
+
 ## [0.4.1] - 2026-07-06
 
 ### Added

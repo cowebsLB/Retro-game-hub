@@ -246,7 +246,12 @@ export function NeonMeteorRunGame() {
       while (s.meteors.length < targetCount) s.meteors.push(makeMeteor(nextId.current++, s.wave));
 
       s.meteors = s.meteors
-        .map(m => ({ ...m, x: m.x + m.vx, y: m.y + m.vy, rotation: m.rotation + m.spin }))
+        .map(m => ({
+          ...m,
+          x: m.x + m.vx * dt,
+          y: m.y + m.vy * dt,
+          rotation: m.rotation + m.spin * dt,
+        }))
         .filter(m => m.y < H + m.radius * 2)
         .map(m => m.x < m.radius || m.x > W - m.radius ? { ...m, vx: m.vx * -1 } : m);
 

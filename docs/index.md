@@ -21,4 +21,4 @@ Retro Game Hub is a static GitHub Pages arcade hub built around a manifest-drive
 ## Release Records
 
 - [Current changelog](../CHANGELOG.md)
-- [Current worklog](worklogs/worklog-06-07-2026.md)
+- [Current worklog](worklogs/worklog-09-07-2026.md)

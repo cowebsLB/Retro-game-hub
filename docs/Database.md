@@ -20,8 +20,7 @@ Current local persistence is intentionally small and device-local:
 - `Neon Meteor Run`: best score
 - `Skyline Sprint GX`: best distance
 - `Memory Vault 84`: best move count
-
-`Pixel Breach` does not currently persist a best-run value.
+- `Pixel Breach`: best score
 
 ## Non-Goals in the Current Release
 

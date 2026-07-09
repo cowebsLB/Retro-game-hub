@@ -13,6 +13,11 @@ type HeroProps = {
   };
 };
 
+const statusBadgeClassNames: Record<GameEntry["status"], string> = {
+  ready: "status-badge status-badge-ready",
+  beta: "status-badge border-yellow-300/40 bg-yellow-300/12 text-yellow-100",
+};
+
 export function Hero({ featuredGame, syncMeta }: HeroProps) {
   return (
     <section className="hero-shell px-6 py-10 sm:px-10 sm:py-14" aria-label="Featured game hero">
@@ -115,7 +120,9 @@ export function Hero({ featuredGame, syncMeta }: HeroProps) {
               <p className="text-xs text-cyan-100/60">
                 Updated {new Date(featuredGame.lastUpdated).toLocaleDateString()}
               </p>
-              <div className="status-badge status-badge-ready">Ready</div>
+              <div className={statusBadgeClassNames[featuredGame.status]}>
+                {featuredGame.status}
+              </div>
             </div>
           </div>
         </div>
